@@ -8,7 +8,7 @@ use "dcli.sh" to start a docker container
 
 2) Set the path to the correct typesystem in dbuild.sh ( e.g. https://github.com/CrossLangNV/DGFISMA_paragraph_detection/blob/master/tests/test_files/typesystems/typesystem.xml )
 
-Given a json, e.g.: https://github.com/CrossLangNV/DGFISMA_paragraph_detection/blob/master/tests/test_files/json/minus_lesser_of.json , with a "cas_content" and "content_type" field, a json with the same fields will be returned, but with definition annotations added. 
+Given a json, e.g.: https://github.com/CrossLangNV/DGFISMA_definition_extraction/blob/master/tests/test_files/json/small_nested_tables.json , with a "cas_content" and "content_type" field, a json with the same fields will be returned (e.g. https://github.com/CrossLangNV/DGFISMA_definition_extraction/blob/master/tests/test_files/response_json/small_nested_tables_response.json), but with definition annotations added. 
 
 The "cas_content" is a UIMA CAS object, encoded in base64. The "content_type" can be "html" or "pdf". 
 
