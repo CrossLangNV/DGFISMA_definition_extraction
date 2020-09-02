@@ -4,9 +4,11 @@ Instructions
 use "dbuild.sh" to build the docker image <br />
 use "dcli.sh" to start a docker container
 
+Don't forget to:
+
 1) Set the path to the directory where the BERT model for classification is located in: https://github.com/ArneDefauw/DGFISMA/blob/master/definition_extraction/dbuild.sh. 
 
-2) Set the path to the correct typesystem in dbuild.sh ( e.g. https://github.com/CrossLangNV/DGFISMA_paragraph_detection/blob/master/tests/test_files/typesystems/typesystem.xml )
+2) Set the path to the correct typesystem in dbuild.sh ( e.g. https://github.com/CrossLangNV/DGFISMA_definition_extraction/blob/master/dbuild.sh )
 
 Given a json, e.g.: https://github.com/CrossLangNV/DGFISMA_definition_extraction/blob/master/tests/test_files/json/small_nested_tables.json , with a "cas_content" and "content_type" field, a json with the same fields will be returned (e.g. https://github.com/CrossLangNV/DGFISMA_definition_extraction/blob/master/tests/test_files/response_json/small_nested_tables_response.json), but with definition annotations added. 
 
