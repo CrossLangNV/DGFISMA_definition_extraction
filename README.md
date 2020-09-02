@@ -4,32 +4,24 @@ Instructions
 use "dbuild.sh" to build the docker image <br />
 use "dcli.sh" to start a docker container
 
-Given a document (json), e.g.: https://github.com/ArneDefauw/DGFISMA/blob/master/definition_extraction/example.json, the program will return a json containing **definitions**, e.g:
+1) Set the path to the directory where the BERT model for classification is located in: https://github.com/ArneDefauw/DGFISMA/blob/master/definition_extraction/dbuild.sh. 
 
-<em>
-{
-    "<strong>definitions</strong>": ‘financial customer’ means a customer that performs one or more of the activities listed in Annex I to Directive 2013/36/EU as its main business, or is one of the following:■■■■(a)■■■■a credit institution;■■■■(b)■■■■an investment firm;■■■■(c)■■■■a financial institution;■■■■(d)■■■■a securitisation special purpose vehicle (‘SSPE’);■■■■(e)■■■■a collective investment undertaking (‘CIU’);■■■■(f)■■■■a non-open ended investment scheme;■■■■(g)■■■■an insurance undertaking;■■■■(h)■■■■a reinsurance undertaking;■■■■(i)■■■■a financial holding company or mixed-financial holding company;\n‘personal investment company’ (‘PIC’) means an undertaking or a trust whose owner or beneficial owner, respectively, is a natural person or a group of closely related natural persons, which was set up with the sole purpose of managing the wealth of the owners and which does not carry out any other commercial, industrial or professional activity. The purpose of the PIC may include other ancillary activities such as segregating the owners' assets from corporate assets, facilitating the transmission of assets within a family or preventing a split of the assets after the death of a member of the family, provided these are connected to the main purpose of managing the owners' wealth;\n‘stress’ shall mean a sudden or severe deterioration in the solvency or liquidity position of a credit institution due to changes in market conditions or idiosyncratic factors as a result of which there may be a significant risk that the credit institution becomes unable to meet its commitments as they fall due within the next 30 calendar days;\n‘margin loans’ means collateralised loans extended to customers for the purpose of taking leveraged trading positions.
-}
-</em>
+2) Set the path to the correct typesystem in dbuild.sh ( e.g. https://github.com/CrossLangNV/DGFISMA_paragraph_detection/blob/master/tests/test_files/typesystems/typesystem.xml )
 
-<br />
-<br />
-Each line in the json is a definition and its context. E.g.: <em>
-  ‘financial customer’ means a customer that performs one or more of the activities listed in Annex I to Directive 2013/36/EU as its main business, or is one of the following:■■■■(a)■■■■a credit institution;■■■■(b)■■■■an investment firm;■■■■(c)■■■■a financial institution;■■■■(d)■■■■a securitisation special purpose vehicle (‘SSPE’);■■■■(e)■■■■a collective investment undertaking (‘CIU’);■■■■(f)■■■■a non-open ended investment scheme;■■■■(g)■■■■an insurance undertaking;■■■■(h)■■■■a reinsurance undertaking;■■■■(i)■■■■a financial holding company or mixed-financial holding company;</em>. 
-<br />
-<br />
+Given a json, e.g.: https://github.com/CrossLangNV/DGFISMA_paragraph_detection/blob/master/tests/test_files/json/minus_lesser_of.json , with a "cas_content" and "content_type" field, a json with the same fields will be returned, but with definition annotations added. 
 
+The "cas_content" is a UIMA CAS object, encoded in base64. The "content_type" can be "html" or "pdf". 
 
-First part, e.g.:
-<em> ‘financial customer’ means a customer that performs one or more of the activities listed in Annex I to Directive 2013/36/EU as its main business, or is one of the following:</em>, was labeled by the classifier as being a definition. The context was then added ( using ■■■■ ) to this detected definition via regular expressions ( see: https://github.com/ArneDefauw/DGFISMA/blob/master/definition_extraction/annotate.py ). 
+If definitions are found, definition annotations will be added to the CAS object ( "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" ) on the 'html2textView', with id="definition".
 
+Sentences that are labeled as not containing a definition, do not receive an annotation.
 
-By default a Bert sequence classifier will be used for classification. Such a model can be trained via https://github.com/ArneDefauw/DGFISMA/blob/master/definition_extraction/bert_classifier/src/train.py
+By default a Bert sequence classifier will be used for classification. Such a model can be trained via https://github.com/CrossLangNV/DGFISMA_definition_extraction/blob/master/bert_classifier/src/train.py
 
-However, fastText sequence classifiers are also supported by https://github.com/ArneDefauw/DGFISMA/blob/master/definition_extraction/definition.py.
-
-Make sure to update the path to the directory where the newly trained model is located in: https://github.com/ArneDefauw/DGFISMA/blob/master/definition_extraction/dbuild.sh. 
+However, fastText sequence classifiers are also supported by https://github.com/CrossLangNV/DGFISMA_definition_extraction/blob/master/definition.py .
 
 When using fastText models for classification, make sure to update the <em>Dockerfile</em> and  <em>app.py</em>
 
-Note that models are not included in the repository, because they are too large. 
+Note that models for sentence classification are not included in the repository, because they are too large. 
+
+To add context (i.e. lists/sublists) to the detected definitions, use the paragraph annotations "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph", that can be added to the 'html2textView' of the CAS using the paragraph annotation app: https://github.com/CrossLangNV/DGFISMA_paragraph_detection .
