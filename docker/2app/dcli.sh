@@ -1,0 +1,1 @@
+docker run -it --rm --gpus '"device=1,"' -p 10001:5000 -v $PWD:/train definition_extraction_app
