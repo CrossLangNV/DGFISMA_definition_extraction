@@ -26,11 +26,8 @@ RUN conda install -y python=3.7.3 && \
 conda install flask==1.1.1 && \
 #conda install --name base scikit-learn=0.20.0 && \
 conda install pandas=1.0.1 && \
-conda install pytorch==1.4.0 cpuonly -c pytorch
-
-#gpu
-#conda install pytorch==1.4.0 cudatoolkit=10.0 -c pytorch
-
+# GPU!
+conda install pytorch==1.4.0 cudatoolkit=10.0 -c pytorch
 
 #Install Cython
 RUN apt-get update
@@ -38,5 +35,4 @@ RUN apt-get -y install --reinstall build-essential
 RUN apt-get -y install gcc
 RUN pip install Cython
 
-RUN pip install spacy==2.2.4 cloudpickle==1.3.0 torchtext==0.5.0 scikit-learn==0.20.0 transformers==2.8.0 scipy==1.4.1 tensorflow==2.1.0 keras==2.3.1 bs4==0.0.1 beautifulsoup4==4.5.3 fasttext==0.9.2 dkpro-cassis==0.3.0 pytest==6.0.1 pexpect ipython jupyter
-
+RUN pip install spacy==2.2.4 cloudpickle==1.3.0 torchtext==0.5.0 scikit-learn==0.20.0 transformers==2.8.0 scipy==1.4.1 tensorflow==2.1.0 keras==2.3.1 bs4==0.0.1 beautifulsoup4==4.5.3 fasttext==0.9.2 dkpro-cassis==0.3.0 pytest==6.0.1 pexpect ipython jupyter jupyterlab
