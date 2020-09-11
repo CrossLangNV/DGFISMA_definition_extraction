@@ -113,3 +113,5 @@ ENV/
 saves/*
 *.pt
 .vscode/
+
+lameeus/
