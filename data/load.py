@@ -23,11 +23,17 @@ class DefinitionData(tuple):
 
 class SentenceData(list):
     def __init__(self, sentences):
-
         super(SentenceData, self).__init__(sentences)
 
         for s in self:
             assert isinstance(s, str)
+
+
+def get_sentences(path=None):
+    if path is None:
+        path = os.path.join(DATA_FOLDER, 'test_sentences')
+
+    return SentenceData(read_lines(path))
 
 
 def get_gold_standard() -> DefinitionData:
@@ -35,13 +41,12 @@ def get_gold_standard() -> DefinitionData:
     Predefined gold standard made by Arne
     """
 
-    path_sentences = os.path.join(DATA_FOLDER, 'test_sentences')
     path_labels = os.path.join(DATA_FOLDER, 'test_labels')
 
-    assert os.path.exists(path_sentences), f"can't find path sentences @ {path_sentences}"
     assert os.path.exists(path_labels), f"can't find path sentences @ {path_labels}"
 
-    sentences = read_lines(path_sentences)
+    sentences = get_sentences()
+
     labels = list(map(int, read_lines(path_labels)))
 
     return DefinitionData(sentences, labels)
@@ -70,13 +75,10 @@ def get_training_data(path_train=None, delimiter=None):
     return DefinitionData(sentences, labels)
 
 
-def get_sentences(path):
-    return SentenceData(read_lines(path))
-
-
 def read_lines(path):
     """
     Reads and lists textlines of document
     """
+
     with open(path, 'r') as f:
         return [s.strip() for s in f.read().strip("\n").split("\n")]
