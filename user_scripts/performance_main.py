@@ -1,0 +1,75 @@
+import math
+import os
+
+import matplotlib.pyplot as plt
+import pandas as pd
+
+
+def main():
+    l_df = []
+
+    directory = os.path.join(os.path.dirname(__file__), 'fasttext_eval')
+    for f in os.listdir(directory):
+        if f.startswith('eval') and f.endswith('.csv'):
+            int(os.path.splitext(f)[0].rsplit('_', 1)[-1].strip('s'))
+            seed = int(os.path.splitext(f)[0].rsplit('_', 1)[-1].strip('s'))
+
+            df_i = pd.read_csv(os.path.join(directory, f),
+                               sep=';', index_col=0)
+
+            df_i['seed'] = seed
+
+            l_df.append(df_i)
+
+    df = pd.concat(l_df, ignore_index=True)
+
+    fig, ax = plt.subplots()
+    label = 'weighted avg'
+    xlabel = 'n_train'
+    ylabel = 'f1-score'
+
+    for name_set, group_set in df.groupby('set'):
+
+        group_filter = group_set[group_set['label'] == label]
+
+        l_x = []
+        l_Q1 = []
+        l_median = []
+        l_Q3 = []
+
+        for xlabel_i, group_xlabel_i in group_filter.groupby(xlabel):
+            l_x.append(xlabel_i)
+
+            l_ylabel = group_xlabel_i[ylabel]
+            # std = statistics.stdev(l_ylabel)
+
+            Q1, median, Q3 = l_ylabel.quantile([0.25, .5, .75])
+
+            l_Q1.append(Q1)
+            l_median.append(median)
+            l_Q3.append(Q3)
+
+        plt.plot(l_x, l_median, '.--', label=name_set)
+        plt.fill_between(l_x, l_Q1, l_Q3, alpha=.2)  # I think it uses same colour as previous line!
+
+    plt.title('Fasttext performance. Median surrounded by Q1 and Q3')
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    ax.set_xscale('log')
+
+    n_min = df['n_train'].min()
+    n_max = df['n_train'].max()
+    10 ** math.ceil(math.log10(n_max))
+
+    plt.xlim([10 ** math.floor(math.log10(n_min)),
+              10 ** math.ceil(math.log10(n_max))])
+
+    plt.legend()
+
+    plt.show()
+
+    return
+
+
+if __name__ == '__main__':
+    main()
