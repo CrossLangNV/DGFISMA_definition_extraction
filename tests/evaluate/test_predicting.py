@@ -3,7 +3,7 @@ import tempfile
 import unittest
 
 
-from evaluate.predicting import predict_fasttext, predict_bert
+from evaluate.predicting import predict_fasttext, predict_bert, Prediction
 
 # to import files from base folder.
 os.chdir("../..")
@@ -18,15 +18,16 @@ def _open_lines(path):
 
 TEST_SENTENCES = _open_lines(path_file)
 
+BERT_model_path = "bert_classifier/models_dgfisma_def_extraction/run_2020_06_26_11_56_31_acb319aac70b/distilbert-base-uncased_model_10.pth"
+
 
 class TestPrediction(unittest.TestCase):
     def test_predict_bert(self):
-        model_path = "bert_classifier/models_dgfisma_def_extraction/run_2020_06_26_11_56_31_acb319aac70b/distilbert-base-uncased_model_10.pth"
 
         with tempfile.NamedTemporaryFile() as temp:
             path_out = temp.name
 
-            pred = predict_bert(path_file, model_path, path_out)
+            pred = predict_bert(path_file, BERT_model_path, path_out)
 
             self.assertTrue(os.path.exists(path_out), 'No file found')
 
@@ -35,6 +36,12 @@ class TestPrediction(unittest.TestCase):
         self.assertTrue(_test_pred(pred), 'Output should be list of indices as integers')
 
         self.assertFalse(os.path.exists(path_out), 'File should only be temporary')
+
+    def test_predict_bert_without_saving(self):
+        pred = predict_bert(path_file, BERT_model_path)
+
+        self.assertIsInstance(pred, Prediction)
+        self.assertTrue(pred)
 
     def test_fasttext(self):
 
