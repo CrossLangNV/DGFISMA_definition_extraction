@@ -1,20 +1,27 @@
 import math
 import os
+import sys
+from pathlib import Path
 
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
+import plac
 
 
-def main():
+@plac.annotations(
+    folder=("folder dir", "positional", None, Path),
+)
+def main(folder):
     l_df = []
 
-    directory = os.path.join(os.path.dirname(__file__), 'fasttext_eval')
-    for f in os.listdir(directory):
+    root = os.path.join(os.path.dirname(__file__), folder)
+    for f in os.listdir(root):
         if f.startswith('eval') and f.endswith('.csv'):
             int(os.path.splitext(f)[0].rsplit('_', 1)[-1].strip('s'))
             seed = int(os.path.splitext(f)[0].rsplit('_', 1)[-1].strip('s'))
 
-            df_i = pd.read_csv(os.path.join(directory, f),
+            df_i = pd.read_csv(os.path.join(root, f),
                                sep=';', index_col=0)
 
             df_i['seed'] = seed
@@ -49,7 +56,13 @@ def main():
             l_median.append(median)
             l_Q3.append(Q3)
 
-        plt.plot(l_x, l_median, '.--', label=name_set)
+        l_x = np.array(l_x)
+        l_Q1 = np.array(l_Q1)
+        l_median = np.array(l_median)
+        l_Q3 = np.array(l_Q3)
+
+        plt.errorbar(l_x, l_median, yerr=np.stack([l_median - l_Q1, l_Q3 - l_median]), fmt='.--', label=name_set)
+
         plt.fill_between(l_x, l_Q1, l_Q3, alpha=.2)  # I think it uses same colour as previous line!
 
     plt.title('Fasttext performance. Median surrounded by Q1 and Q3')
@@ -72,4 +85,9 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+
+    if len(sys.argv) > 1:
+        plac.call(main)
+    else:
+        folder = f'fasttext_eval/autotune'
+        main(folder)

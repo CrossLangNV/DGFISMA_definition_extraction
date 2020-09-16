@@ -5,31 +5,67 @@
 * Train
 * Evaluate
 """
+import os
 import tempfile
+from typing import List
 
 import fasttext
 import numpy as np
-from numpy import random
 import pandas as pd
+from numpy import random
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
-
 
 from data.load import get_training_data, get_gold_standard
 
 
+def tokenize(sentences, option='nltk'):
+    """
+    Experimenting with different options:
+        * BERT tokenizer
+        * Spacy
+        * https://www.nltk.org/
+    """
+
+    if option not in ['nltk']:
+        raise ValueError(f'Unknown value for option: {option}')
+
+    if option == 'nltk':
+
+        import nltk
+
+        nltk.word_tokenize(sentences[0])
+
+        if isinstance(sentences, list):
+
+            sentences_tok = []
+            for sentence in sentences:
+                sentences_tok.append(' '.join(nltk.word_tokenize(sentence)))
+
+        else:
+            sentences_tok = nltk.word_tokenize(sentences)
+
+        return sentences_tok
+
+
 def data_main(seed,
-              val_size):
+              val_ratio):
     # TODO refactor to be used by both trainers (Fasttext and BERT)
 
     x_test, y_test = get_gold_standard()
 
     x, y = get_training_data()
 
+    def preprocessing(x: List[str]) -> List[str]:
+        return [x_i.lower() for x_i in x]
+
+    x_test = preprocessing(tokenize(x_test))
+    x = preprocessing(tokenize(x))
+
     x_train, x_valid, y_train, y_valid = train_test_split(x, y,
                                                           random_state=seed,
                                                           shuffle=True,
-                                                          test_size=val_size)
+                                                          test_size=val_ratio)
 
     return (x_train, y_train), (x_valid, y_valid), (x_test, y_test)
 
@@ -37,30 +73,51 @@ def data_main(seed,
 class ModelFasttext(object):
     labels = ['__label__no_definition', '__label__definition']
 
-    def __init__(self, seed):
+    def __init__(self,
+                 seed,
+                 ):
         self.seed = seed
 
     def get_model(self):
         return self.model
 
-    def train(self, x_train, y_train):
+    def train(self, x_train, y_train, validation: List[list]):
+        """
+        Train the fasttext model by autotuning on validation set.
+        """
 
-        with tempfile.NamedTemporaryFile() as f:
-            filename_train = f.name
+        with tempfile.NamedTemporaryFile() as f_valid:
+            filename_valid = f_valid.name
 
-            with open(filename_train, "w") as f:
-                for text, label in zip(x_train, y_train):
+            with open(filename_valid, "w") as f:
+                for text, label in zip(*validation):
                     f.write(f'{self.labels[label]} {text}\n')
 
-            model = fasttext.train_supervised(
-                input=filename_train,
-                epoch=200,
-                dim=100,
-                minCount=5,
-                ws=1,
-                seed=self.seed,
-                thread=1,   # To make fully fully reproducible https://fasttext.cc/docs/en/faqs.html
-            )
+            with tempfile.NamedTemporaryFile() as f:
+                filename_train = f.name
+
+                with open(filename_train, "w") as f:
+                    for text, label in zip(x_train, y_train):
+                        f.write(f'{self.labels[label]} {text}\n')
+
+                """
+                The following can be optimized:
+                Warning : bucket is manually set to a specific value. It will not be automatically optimized.
+                Warning : wordNgrams is manually set to a specific value. It will not be automatically optimized.
+                Warning : dim is manually set to a specific value. It will not be automatically optimized.
+                Warning : lr is manually set to a specific value. It will not be automatically optimized.
+                Warning : epoch is manually set to a specific value. It will not be automatically optimized.
+                """
+
+                model = fasttext.train_supervised(
+                    input=filename_train,
+                    minCount=5,
+                    ws=1,
+                    seed=self.seed,
+                    thread=1,  # To make fully fully reproducible https://fasttext.cc/docs/en/faqs.html
+                    autotuneValidationFile=filename_valid,
+                )
+
         self.model = model
 
     def predict(self, x):
@@ -72,18 +129,29 @@ class ModelFasttext(object):
 
         return pred
 
+    def get_model_info(self):
+        return {'dim': self.get_model().get_dimension(),
+                'epochs': self.get_model().epoch,
+                'wordNgrams': self.get_model().wordNgrams,
+                'lr': self.get_model().lr,
+                'bucket': self.get_model().bucket}
+
 
 def main(seed=15092020,
-         val_size=.2,
-         b_save=False):
+         val_ratio=.2
+         ):
+    """
+    Produce a csv with performance of training fasttext for definition extraction
+    """
+
     # Data preparation
     (x_train, y_train), (x_valid, y_valid), (x_test, y_test) = data_main(seed,
-                                                                         val_size=val_size)
+                                                                         val_ratio=val_ratio)
 
     # Preparing model
     model_fasttext = ModelFasttext(seed)
 
-    def get_info(n_train,
+    def get_data_info(n_train,
                  report,
                  label,
                  dataset):
@@ -104,13 +172,16 @@ def main(seed=15092020,
 
     delta = .1
     n_train_tot = len(x_train)
-    for split in np.arange(1, 0, -delta)[::-1]:
+    # for split in np.arange(1, 0, -delta)[::-1]:
+    for split in [1]:
         n_split = int(np.round(split * n_train_tot))
 
         x_train_split = x_train[:n_split]
         y_train_split = y_train[:n_split]
 
-        model_fasttext.train(x_train_split, y_train_split)
+        model_fasttext.train(x_train_split, y_train_split, validation=(x_valid, y_valid))
+
+        model_info = model_fasttext.get_model_info()
 
         pred_train_split = model_fasttext.predict(x_train_split)
         pred_valid = model_fasttext.predict(x_valid)
@@ -126,15 +197,21 @@ def main(seed=15092020,
             report = classification_report(y, pred, output_dict=True)
 
             for label in ['0', '1', 'weighted avg']:
-                info = get_info(n_train,
+                info = get_data_info(n_train,
                                 report,
                                 label,
                                 dataset)
+
+                info.update(model_info)
+
                 l.append(info)
 
     df = pd.DataFrame(l)
 
-    df.to_csv(f'fasttext_eval/eval_s{seed}.csv', sep=';')
+    filename_save = f'fasttext_eval/autotune/eval_s{seed}.csv'
+    if not os.path.exists(os.path.dirname(filename_save)):
+        os.mkdir(os.path.dirname(filename_save))
+    df.to_csv(filename_save, sep=';')
 
     return
 
@@ -145,4 +222,5 @@ if __name__ == '__main__':
     seeds = random.randint(10000, size=(100,))
 
     for seed in seeds:
-        main(b_save=False, seed=seed)
+        main(seed=seed,
+             )
