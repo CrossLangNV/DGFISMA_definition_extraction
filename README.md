@@ -27,3 +27,14 @@ When using fastText models for classification, make sure to update the <em>Docke
 Note that models for sentence classification are not included in the repository, because they are too large. 
 
 To add context (i.e. lists/sublists) to the detected definitions, use the paragraph annotations "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph", that can be added to the 'html2textView' of the CAS using the paragraph annotation app: https://github.com/CrossLangNV/DGFISMA_paragraph_detection .
+
+# Training and evaluation the model
+
+In [user_scripts/train_bert_main.py](user_scripts/train_bert_main.py) multiple bert models are trained to be able to compare performances. 
+
+In [user_scripts/evaluate_main.py](user_scripts/evaluate_main.py) the folder with logs can be inputted and evaluated.
+
+# Retraining workflow
+
+Whole retraining workflow example can be found at:
+[examples/example_retraining_flow.py](examples/example_retraining_flow.py) 
