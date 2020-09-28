@@ -76,6 +76,10 @@ class DefExtractModel(object):
         # Tracking variables
         predictions_proba = []
         # Predict
+
+        n_x = len(sentences)
+        n_temp = 0
+
         for batch in prediction_dataloader:
             # Add batch to GPU
             batch = tuple(t.to(self.device) for t in batch)
@@ -90,6 +94,9 @@ class DefExtractModel(object):
             # Store predictions and true labels
             prediction_proba = F.softmax(logits, dim=1).detach().cpu().numpy()
             predictions_proba.append(prediction_proba)
+
+            n_temp += len(prediction_proba)
+            print(f'\tInference: {n_temp / n_x:.1%}')
 
         flat_predictions_proba = [item for sublist in predictions_proba for item in sublist]
         predictions_labels = np.argmax(flat_predictions_proba, axis=1).flatten()
