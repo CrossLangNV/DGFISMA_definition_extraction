@@ -1,0 +1,509 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>user_scripts package &mdash; Def extraction  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="tests.retraining package" href="tests.retraining.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Def extraction
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">pycharm_project_370</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="app.html">app module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleaning.html">cleaning module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">data package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="definition.html">definition module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lameeus.html">lameeus package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html">models package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="retraining.html">retraining package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html">tests package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">user_scripts package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-user_scripts.classifier_eval">user_scripts.classifier_eval module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-user_scripts.classifier_pred">user_scripts.classifier_pred module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-user_scripts.classifier_train">user_scripts.classifier_train module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-user_scripts.eval_bert">user_scripts.eval_bert module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-user_scripts.evaluate_main">user_scripts.evaluate_main module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-user_scripts.hypersearch_main">user_scripts.hypersearch_main module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user-scripts-performance-main-module">user_scripts.performance_main module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-user_scripts.predict_bert">user_scripts.predict_bert module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-user_scripts.retrain">user_scripts.retrain module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-user_scripts.retraining_example">user_scripts.retraining_example module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-user_scripts.train_bert">user_scripts.train_bert module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-user_scripts.train_bert_main">user_scripts.train_bert_main module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-user_scripts.train_fasttext_main">user_scripts.train_fasttext_main module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-user_scripts">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Def extraction</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">pycharm_project_370</a> &raquo;</li>
+        
+      <li>user_scripts package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/user_scripts.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="user-scripts-package">
+<h1>user_scripts package<a class="headerlink" href="#user-scripts-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-user_scripts.classifier_eval">
+<span id="user-scripts-classifier-eval-module"></span><h2>user_scripts.classifier_eval module<a class="headerlink" href="#module-user_scripts.classifier_eval" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="user_scripts.classifier_eval.main">
+<code class="sig-prename descclassname">user_scripts.classifier_eval.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_y</span><span class="p">:</span> <span class="n">‘Filename of labels’</span></em>, <em class="sig-param"><span class="n">path_pred</span><span class="p">:</span> <span class="n">‘Filename of predictions’</span></em>, <em class="sig-param"><span class="n">path_logger</span><span class="p">:</span> <span class="n">‘Filename of logger’, ‘option’</span> <span class="o">=</span> <span class="default_value">'.'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_scripts.classifier_eval.main" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-user_scripts.classifier_pred">
+<span id="user-scripts-classifier-pred-module"></span><h2>user_scripts.classifier_pred module<a class="headerlink" href="#module-user_scripts.classifier_pred" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="user_scripts.classifier_pred.main">
+<code class="sig-prename descclassname">user_scripts.classifier_pred.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model_dir</span><span class="p">:</span> <span class="n">‘Directory containing model’</span></em>, <em class="sig-param"><span class="n">path_x</span><span class="p">:</span> <span class="n">‘Filename of sentences’</span></em>, <em class="sig-param"><span class="n">path_pred</span><span class="p">:</span> <span class="n">‘Filename of where to write predictions’, ‘option’</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_scripts.classifier_pred.main" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-user_scripts.classifier_train">
+<span id="user-scripts-classifier-train-module"></span><h2>user_scripts.classifier_train module<a class="headerlink" href="#module-user_scripts.classifier_train" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="user_scripts.classifier_train.main">
+<code class="sig-prename descclassname">user_scripts.classifier_train.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">train_sentences</span><span class="p">:</span> <span class="n">‘Location of training sentences’</span></em>, <em class="sig-param"><span class="n">train_labels</span><span class="p">:</span> <span class="n">‘Location of training labels’</span></em>, <em class="sig-param"><span class="n">model_storage_directory</span><span class="p">:</span> <span class="n">‘Location of output model directory’</span></em>, <em class="sig-param"><span class="n">validation_split</span><span class="p">:</span> <span class="n">‘Fraction of training data to use as validation data’, ‘option’</span> <span class="o">=</span> <span class="default_value">0.2</span></em>, <em class="sig-param"><span class="n">validation_sentences</span><span class="p">:</span> <span class="n">‘Location of validation sentences’, ‘option’</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">validation_labels</span><span class="p">:</span> <span class="n">‘Location of validation labels’, ‘option’</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">epochs</span><span class="p">:</span> <span class="n">‘number of epochs to train’, ‘option’</span> <span class="o">=</span> <span class="default_value">10</span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_scripts.classifier_train.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Train the model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_sentences</strong> – <p>path to file that contains input sentences
+example file:</p>
+<blockquote>
+<div><p>”This is sentence 1</p>
+<p>While this is another sentence</p>
+<p>”</p>
+</div></blockquote>
+</p></li>
+<li><p><strong>train_labels</strong> – <p>path to file that contains the labels (all integers)
+example file:</p>
+<blockquote>
+<div><p>”1</p>
+<p>0</p>
+<p>”</p>
+</div></blockquote>
+</p></li>
+<li><p><strong>model_storage_directory</strong> – path to where model should be saved</p></li>
+<li><p><strong>validation_split</strong> – fraction of training data to be used as validation data.
+If validation_sentences and validation_labels are both not None,
+this will be ignored and whole training dataset is used.</p></li>
+<li><p><strong>validation_sentences</strong> – path to file with validation dataset sentences. Same format as train_sentences.</p></li>
+<li><p><strong>validation_labels</strong> – path to file with validation dataset labels. Same format as train_labels.</p></li>
+<li><p><strong>epochs</strong> – number of epochs to train the model.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>trained model is saved in model_dir</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-user_scripts.eval_bert">
+<span id="user-scripts-eval-bert-module"></span><h2>user_scripts.eval_bert module<a class="headerlink" href="#module-user_scripts.eval_bert" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="user_scripts.eval_bert.main">
+<code class="sig-prename descclassname">user_scripts.eval_bert.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_y</span><span class="p">:</span> <span class="n">‘Filename of labels’</span></em>, <em class="sig-param"><span class="n">path_pred</span><span class="p">:</span> <span class="n">‘Filename of predictions’</span></em>, <em class="sig-param"><span class="n">path_logger</span><span class="p">:</span> <span class="n">‘Filename of logger’, ‘option’</span> <span class="o">=</span> <span class="default_value">'.'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_scripts.eval_bert.main" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-user_scripts.evaluate_main">
+<span id="user-scripts-evaluate-main-module"></span><h2>user_scripts.evaluate_main module<a class="headerlink" href="#module-user_scripts.evaluate_main" title="Permalink to this headline">¶</a></h2>
+<p>By Laurens</p>
+<dl class="py function">
+<dt id="user_scripts.evaluate_main.main">
+<code class="sig-prename descclassname">user_scripts.evaluate_main.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#user_scripts.evaluate_main.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate BERT and fasttext model</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-user_scripts.hypersearch_main">
+<span id="user-scripts-hypersearch-main-module"></span><h2>user_scripts.hypersearch_main module<a class="headerlink" href="#module-user_scripts.hypersearch_main" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt>Training fasttext with</dt><dd><p>dim = 10
+lr = 1.0
+wordngrams = 2
+bucket = 200k</p>
+</dd>
+</dl>
+<p>seemed to result in a huge performance increase! It might be worth it to optimize the hyper parameters!</p>
+</div>
+<div class="section" id="user-scripts-performance-main-module">
+<h2>user_scripts.performance_main module<a class="headerlink" href="#user-scripts-performance-main-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-user_scripts.predict_bert">
+<span id="user-scripts-predict-bert-module"></span><h2>user_scripts.predict_bert module<a class="headerlink" href="#module-user_scripts.predict_bert" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="user_scripts.predict_bert.main">
+<code class="sig-prename descclassname">user_scripts.predict_bert.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model_dir</span><span class="p">:</span> <span class="n">‘Directory containing model’</span></em>, <em class="sig-param"><span class="n">path_x</span><span class="p">:</span> <span class="n">‘Filename of sentences’</span></em>, <em class="sig-param"><span class="n">path_pred</span><span class="p">:</span> <span class="n">‘Filename of where to write predictions’, ‘option’</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_scripts.predict_bert.main" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-user_scripts.retrain">
+<span id="user-scripts-retrain-module"></span><h2>user_scripts.retrain module<a class="headerlink" href="#module-user_scripts.retrain" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="user_scripts.retrain.main">
+<code class="sig-prename descclassname">user_scripts.retrain.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">train_data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_scripts.retrain.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-user_scripts.retraining_example">
+<span id="user-scripts-retraining-example-module"></span><h2>user_scripts.retraining_example module<a class="headerlink" href="#module-user_scripts.retraining_example" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="user_scripts.retraining_example.main">
+<code class="sig-prename descclassname">user_scripts.retraining_example.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#user_scripts.retraining_example.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-user_scripts.train_bert">
+<span id="user-scripts-train-bert-module"></span><h2>user_scripts.train_bert module<a class="headerlink" href="#module-user_scripts.train_bert" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="user_scripts.train_bert.main">
+<code class="sig-prename descclassname">user_scripts.train_bert.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">train_sentences</span><span class="p">:</span> <span class="n">‘Location of training sentences’</span></em>, <em class="sig-param"><span class="n">train_labels</span><span class="p">:</span> <span class="n">‘Location of training labels’</span></em>, <em class="sig-param"><span class="n">model_storage_directory</span><span class="p">:</span> <span class="n">‘Location of output model directory’</span></em>, <em class="sig-param"><span class="n">validation_split</span><span class="p">:</span> <span class="n">‘Fraction of training data to use as validation data’, ‘option’</span> <span class="o">=</span> <span class="default_value">0.2</span></em>, <em class="sig-param"><span class="n">validation_sentences</span><span class="p">:</span> <span class="n">‘Location of validation sentences’, ‘option’</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">validation_labels</span><span class="p">:</span> <span class="n">‘Location of validation labels’, ‘option’</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">epochs</span><span class="p">:</span> <span class="n">‘number of epochs to train’, ‘option’</span> <span class="o">=</span> <span class="default_value">10</span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_scripts.train_bert.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Train the model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_sentences</strong> – <p>path to file that contains input sentences
+example file:</p>
+<blockquote>
+<div><p>”This is sentence 1</p>
+<p>While this is another sentence</p>
+<p>”</p>
+</div></blockquote>
+</p></li>
+<li><p><strong>train_labels</strong> – <p>path to file that contains the labels (all integers)
+example file:</p>
+<blockquote>
+<div><p>”1</p>
+<p>0</p>
+<p>”</p>
+</div></blockquote>
+</p></li>
+<li><p><strong>model_storage_directory</strong> – path to where model should be saved</p></li>
+<li><p><strong>validation_split</strong> – fraction of training data to be used as validation data.
+If validation_sentences and validation_labels are both not None,
+this will be ignored and whole training dataset is used.</p></li>
+<li><p><strong>validation_sentences</strong> – path to file with validation dataset sentences. Same format as train_sentences.</p></li>
+<li><p><strong>validation_labels</strong> – path to file with validation dataset labels. Same format as train_labels.</p></li>
+<li><p><strong>epochs</strong> – number of epochs to train the model.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>trained model is saved in model_dir</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-user_scripts.train_bert_main">
+<span id="user-scripts-train-bert-main-module"></span><h2>user_scripts.train_bert_main module<a class="headerlink" href="#module-user_scripts.train_bert_main" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Load data</p></li>
+<li><p>Split data</p></li>
+<li><p>Init a model</p></li>
+<li><p>Train</p></li>
+<li><p>Evaluate</p></li>
+</ul>
+<dl class="py class">
+<dt id="user_scripts.train_bert_main.ModelBERT">
+<em class="property">class </em><code class="sig-prename descclassname">user_scripts.train_bert_main.</code><code class="sig-name descname">ModelBERT</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seed</span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_scripts.train_bert_main.ModelBERT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="user_scripts.train_bert_main.ModelBERT.predict">
+<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_scripts.train_bert_main.ModelBERT.predict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="user_scripts.train_bert_main.ModelBERT.train">
+<code class="sig-name descname">train</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x_train</span></em>, <em class="sig-param"><span class="n">y_train</span></em>, <em class="sig-param"><span class="n">validation</span><span class="p">:</span> <span class="n">tuple</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_scripts.train_bert_main.ModelBERT.train" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="user_scripts.train_bert_main.TempFileSentence">
+<code class="sig-prename descclassname">user_scripts.train_bert_main.</code><code class="sig-name descname">TempFileSentence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_scripts.train_bert_main.TempFileSentence" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="user_scripts.train_bert_main.TempFileSentenceLabel">
+<code class="sig-prename descclassname">user_scripts.train_bert_main.</code><code class="sig-name descname">TempFileSentenceLabel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_scripts.train_bert_main.TempFileSentenceLabel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="user_scripts.train_bert_main.main">
+<code class="sig-prename descclassname">user_scripts.train_bert_main.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seed</span></em>, <em class="sig-param"><span class="n">val_ratio</span><span class="o">=</span><span class="default_value">0.2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_scripts.train_bert_main.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-user_scripts.train_fasttext_main">
+<span id="user-scripts-train-fasttext-main-module"></span><h2>user_scripts.train_fasttext_main module<a class="headerlink" href="#module-user_scripts.train_fasttext_main" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Load data</p></li>
+<li><p>Split data</p></li>
+<li><p>Init a model</p></li>
+<li><p>Train</p></li>
+<li><p>Evaluate</p></li>
+</ul>
+<dl class="py class">
+<dt id="user_scripts.train_fasttext_main.ModelFasttext">
+<em class="property">class </em><code class="sig-prename descclassname">user_scripts.train_fasttext_main.</code><code class="sig-name descname">ModelFasttext</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seed</span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_scripts.train_fasttext_main.ModelFasttext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="user_scripts.train_fasttext_main.ModelFasttext.get_model">
+<code class="sig-name descname">get_model</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#user_scripts.train_fasttext_main.ModelFasttext.get_model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="user_scripts.train_fasttext_main.ModelFasttext.get_model_info">
+<code class="sig-name descname">get_model_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#user_scripts.train_fasttext_main.ModelFasttext.get_model_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="user_scripts.train_fasttext_main.ModelFasttext.labels">
+<code class="sig-name descname">labels</code><em class="property"> = ['__label__no_definition', '__label__definition']</em><a class="headerlink" href="#user_scripts.train_fasttext_main.ModelFasttext.labels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="user_scripts.train_fasttext_main.ModelFasttext.predict">
+<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_scripts.train_fasttext_main.ModelFasttext.predict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="user_scripts.train_fasttext_main.ModelFasttext.train">
+<code class="sig-name descname">train</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x_train</span></em>, <em class="sig-param"><span class="n">y_train</span></em>, <em class="sig-param"><span class="n">validation</span><span class="p">:</span> <span class="n">List<span class="p">[</span>list<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_scripts.train_fasttext_main.ModelFasttext.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Train the fasttext model by autotuning on validation set.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="user_scripts.train_fasttext_main.main">
+<code class="sig-prename descclassname">user_scripts.train_fasttext_main.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">15092020</span></em>, <em class="sig-param"><span class="n">val_ratio</span><span class="o">=</span><span class="default_value">0.2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_scripts.train_fasttext_main.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Produce a csv with performance of training fasttext for definition extraction</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-user_scripts">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-user_scripts" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="tests.retraining.html" class="btn btn-neutral float-left" title="tests.retraining package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, CrossLang
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
