@@ -1,7 +1,7 @@
 import os
 import tempfile
 
-from user_scripts.lameeus import eval_bert, predict_bert, train_bert
+from user_scripts import classifier_eval, classifier_pred, classifier_train
 
 if __name__ == '__main__':
     """
@@ -14,7 +14,7 @@ if __name__ == '__main__':
     """
     Settings
     """
-    EXAMPLE_FOLDER = os.path.join(os.path.dirname(__file__), "../user_scripts/lameeus/example_retraining_flow")
+    EXAMPLE_FOLDER = os.path.join(os.path.dirname(__file__), "output")
 
     ROOT = os.path.join(os.path.dirname(__file__), '..')
 
@@ -24,9 +24,9 @@ if __name__ == '__main__':
     path_test_x = os.path.join(ROOT, 'tests/test_files/arne/test_sentences')
     path_test_y = os.path.join(ROOT, 'tests/test_files/arne/test_labels')
 
-    b_train = False
-    b_evaluate = False
-    b_predict = False
+    b_train = True
+    b_evaluate = True
+    b_predict = True
 
     """
     The 3 components of workflow
@@ -38,9 +38,9 @@ if __name__ == '__main__':
 
         path_model = EXAMPLE_FOLDER
 
-        train_bert.main(path_train_x,
-                        path_train_y,
-                        path_model)
+        classifier_train.main(path_train_x,
+                              path_train_y,
+                              path_model)
 
     if b_evaluate:
         """
@@ -54,13 +54,13 @@ if __name__ == '__main__':
         model_dir = os.path.join(EXAMPLE_FOLDER, model_folder)
 
         with tempfile.NamedTemporaryFile(suffix='.txt') as f:
-            predict_bert.main(model_dir,
-                              path_test_x,
-                              f.name)
+            classifier_pred.main(model_dir,
+                                 path_test_x,
+                                 f.name)
 
-            eval_bert.main(path_test_y,
-                           f.name,
-                           EXAMPLE_FOLDER)
+            classifier_eval.main(path_test_y,
+                                 f.name,
+                                 EXAMPLE_FOLDER)
 
     if b_predict:
         """
@@ -73,8 +73,8 @@ if __name__ == '__main__':
         # If it is better, based on evaluation, select it and update predictions
 
         filename_pred = os.path.join(EXAMPLE_FOLDER, 'pred.txt')
-        predict_bert.main(model_dir,
-                          path_train_x,
-                          filename_pred)
+        classifier_pred.main(model_dir,
+                             path_train_x,
+                             filename_pred)
 
     print("finished")
