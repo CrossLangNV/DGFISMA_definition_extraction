@@ -1,4 +1,5 @@
 import os
+from typing import List
 
 DATA_FOLDER = os.path.join(os.path.dirname(__file__), '../tests/test_files/arne')
 DATA_FOLDER = os.path.normpath(DATA_FOLDER)
@@ -6,8 +7,17 @@ assert os.path.exists(DATA_FOLDER)
 
 
 class DefinitionData(tuple):
+    """
+    Tuple for definition data that links sentence and label list
+    """
 
-    def __new__(cls, sentences, labels):
+    def __new__(cls, sentences: List[str], labels: List[int]):
+        """Construct (sentences, labels) tuple
+
+        Args:
+            sentences: list of definition sentences
+            labels: list of classification indices
+        """
         sentences = SentenceData(sentences)
 
         assert isinstance(labels, list)
@@ -22,18 +32,57 @@ class DefinitionData(tuple):
 
 
 class SentenceData(list):
-    def __init__(self, sentences):
+    """Class for sentence data
+
+    Args:
+        sentences: list of sentences
+    """
+
+    def __init__(self, sentences: List[str]):
         super(SentenceData, self).__init__(sentences)
 
         for s in self:
             assert isinstance(s, str)
 
+    @classmethod
+    def from_file(cls, path=os.path.join(DATA_FOLDER, 'test_sentences')):
+        """ Return :class:`SentenceData` object from a file
 
-def get_sentences(path=None):
-    if path is None:
-        path = os.path.join(DATA_FOLDER, 'test_sentences')
+        Args:
+            path: path to file with sentences
 
-    return SentenceData(read_lines(path))
+        Returns:
+            :class:`SentenceData` object
+        """
+
+        return cls(read_lines(path))
+
+
+class LabelData(list):
+    """Class for label data
+
+    Args:
+        labels: list of labels
+    """
+
+    def __init__(self, labels: List[int]):
+        super(LabelData, self).__init__(labels)
+
+        for s in self:
+            assert isinstance(s, int)
+
+    @classmethod
+    def from_file(cls, path=os.path.join(DATA_FOLDER, 'test_labels')):
+        """ Return :class:`LabelData` object from a file
+
+        Args:
+            path: path to file with indices
+
+        Returns:
+            :class:`LabelData` object
+        """
+
+        return cls(map(int, read_lines(path)))
 
 
 def get_gold_standard() -> DefinitionData:
@@ -41,18 +90,15 @@ def get_gold_standard() -> DefinitionData:
     Predefined gold standard made by Arne
     """
 
-    path_labels = os.path.join(DATA_FOLDER, 'test_labels')
+    sentences = SentenceData.from_file()
 
-    assert os.path.exists(path_labels), f"can't find path sentences @ {path_labels}"
-
-    sentences = get_sentences()
-
-    labels = list(map(int, read_lines(path_labels)))
+    labels = LabelData.from_file()
 
     return DefinitionData(sentences, labels)
 
 
-def get_training_data(path_train=None, delimiter=None):
+def get_training_data(path_train=None,
+                      delimiter=None):
     """
     If path is None, default file is used
     """
@@ -77,7 +123,7 @@ def get_training_data(path_train=None, delimiter=None):
 
 def read_lines(path):
     """
-    Reads and lists textlines of document
+    Reads and lists text lines of document
     """
 
     with open(path, 'r') as f:
