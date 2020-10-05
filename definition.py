@@ -25,7 +25,7 @@ from bert_classifier.src.models import BertSequenceClassifier, DistilBertSequenc
 
 class DefinitionFinder():
     
-    def __init__( self, sentences=None ):
+    def __init__( self, sentences=None):
         
         '''
         :param sentences: List. List of Strings (i.e. sentences).

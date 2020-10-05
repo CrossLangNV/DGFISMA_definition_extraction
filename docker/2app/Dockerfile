@@ -9,6 +9,7 @@ COPY app.py /work
 COPY cleaning.py /work
 COPY definition.py /work
 COPY bert_classifier/src/models.py /work/bert_classifier/src/
+COPY . /work
 
 #copy model:
 COPY $MODEL_DIR/*.pth /work/models/model.pth

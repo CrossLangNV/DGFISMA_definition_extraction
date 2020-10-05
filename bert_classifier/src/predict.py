@@ -13,7 +13,7 @@ from transformers import DistilBertConfig
 from transformers.tokenization_bert import BertTokenizer
 from transformers.tokenization_distilbert import DistilBertTokenizer
 
-from data.load import get_sentences
+from data.load import SentenceData
 from .models import BertSequenceClassifier, DistilBertSequenceClassifier, DistilBertGRUSequenceClassifier
 
 
@@ -146,7 +146,7 @@ def get_tokenizer(model_path):
 
 
 def load_sentences(filepath, base_64=False):
-    sentences = get_sentences(filepath)
+    sentences = SentenceData.from_file(filepath)
 
     if base_64:
         sentences = [b64decode(sentence).decode() for sentence in sentences]
