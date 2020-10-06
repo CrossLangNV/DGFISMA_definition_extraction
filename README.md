@@ -28,13 +28,28 @@ Note that models for sentence classification are not included in the repository,
 
 To add context (i.e. lists/sublists) to the detected definitions, use the paragraph annotations "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph", that can be added to the 'html2textView' of the CAS using the paragraph annotation app: https://github.com/CrossLangNV/DGFISMA_paragraph_detection .
 
-# Training and evaluation the model
+## User scripts
 
-In [user_scripts/train_bert_main.py](user_scripts/train_bert_main.py) multiple bert models are trained to be able to compare performances. 
+### Retraining
 
-In [user_scripts/evaluate_main.py](user_scripts/evaluate_main.py) the folder with logs can be inputted and evaluated.
+To enable retraining, user scripts are provided to make it easy to train a new model, evaluate it and export to a folder.
 
-# Retraining workflow
+These user_scripts are provided in:
+* [user_scripts/classifier_train.py](user_scripts/classifier_train.py)
+* [user_scripts/classifier_eval.py](user_scripts/classifier_eval.py)
+* [user_scripts/classifier_pred.py](user_scripts/classifier_pred.py)
 
-Whole retraining workflow example can be found at:
-[examples/example_retraining_flow.py](examples/example_retraining_flow.py) 
+An example of a whole retraining worklow is proved in:
+* [examples/example_retraining_flow.py](examples/example_retraining_flow.py) 
+
+### Evaluation of FastText and Attention Neural Network pre-trained on DistilBERT
+
+To decide whether to use FastText or a BERT based model, both where tested extensively by running many iterations and reporting average performances.
+
+The scripts used are found at:
+* [examples/train_bert_main.py](examples/train_bert_main.py)
+* [examples/train_fasttext_main.py](examples/train_fasttext_main.py)
+* [examples/performance_main.py](examples/performance_main.py) for plotting the distribution of the performance measures. Folder with generated logs can be provided and is evaluated.
+
+To compare the actual inference speed, a seperate script can be found at:
+* [examples/evaluate_inference.py](examples/evaluate_inference.py)
