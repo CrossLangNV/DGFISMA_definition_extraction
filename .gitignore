@@ -110,3 +110,6 @@ ENV/
 saves/*
 *.pt
 .vscode/
+
+# Pycharm
+.idea
