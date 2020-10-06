@@ -5,35 +5,41 @@ By Laurens
 import os
 import time
 
-from bert_classifier.src.predict import DefExtractModel
-from data.load import get_gold_standard
-from evaluate.eval import report
+from sklearn.metrics import classification_report
+
+from data.load import get_gold_standard, get_training_data
 from evaluate.predicting import predict_fasttext
+from models.preconfigured import BERTForDefinitionClassification
 
 ROOT = os.path.join(os.path.dirname(__file__), '..')
 
 
 def main():
     """
-    Evaluate BERT and fasttext model
+    Evaluate BERT and fasttext model speed
     """
 
-    sentences, labels = get_gold_standard()
+    if 0:
+        sentences, labels = get_gold_standard()
+    else:
+        # Larger dataset to have a better indication of inference speed.
+        sentences, labels = get_training_data()
 
     if 1:
         """
         BERT:
         """
 
-        model_bert_path = os.path.join(ROOT,
-                                       'bert_classifier/models_dgfisma_def_extraction/run_2020_06_26_11_56_31_acb319aac70b/distilbert-base-uncased_model_10.pth')
+        model_dir = os.path.join(ROOT, 'bert_classifier/models_dgfisma_def_extraction/retraining_example')
 
         # Load model
-        model_bert = DefExtractModel(model_bert_path)
+        # Ignore loading model time.
+        model = BERTForDefinitionClassification.from_dir(model_dir)
 
         t0 = time.time()
         # Prediction
-        pred_bert, flat_predictions_proba = model_bert.predict(sentences)
+
+        pred_bert, _ = model.predict(sentences)
 
         t1 = time.time()
         t_bert = t1 - t0
@@ -42,7 +48,7 @@ def main():
         print("BERT")
         print('\033[0m', end='')
         print(f"\tSpeed: T = {t_bert} s")
-        report(labels, pred_bert)
+        classification_report(labels, pred_bert)
 
     """
     Fast text:
@@ -61,7 +67,7 @@ def main():
     print("Fast text")
     print('\033[0m', end='')
     print(f"\tSpeed: T = {t_fasttext} s")
-    report(labels, prediction_fasttext)
+    classification_report(labels, prediction_fasttext)
 
     return
 
