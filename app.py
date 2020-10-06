@@ -15,8 +15,7 @@ from models.preconfigured import BERTForDefinitionClassification
 app = Flask(__name__)
 
 TYPESYSTEM_PATH = "/work/typesystems/typesystem.xml"
-# MODEL_PATH = "/work/models/model.pth"
-MODEL_PATH = 'user_scripts/bert_classifier_wordpiece/models_dgfisma_def_extraction/run_2020_09_25_07_19_54_ddb93877f093'
+MODEL_PATH = "/work/models/model.pth"
 DEVICE = 'cpu'  # 'cpu', 'cuda:0', 'cuda:1',...
 NR_OF_THREADS = 12  # ignored when device is not equal to 'cpu'
 
