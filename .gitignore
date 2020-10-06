@@ -1,4 +1,3 @@
-DATA/
 #models
 *.pth
 *.p
@@ -107,8 +106,6 @@ ENV/
 # mypy
 .mypy_cache/
 
-#data
-.data/*
 .vector_cache/*
 saves/*
 *.pt

@@ -1,15 +1,18 @@
 import base64
 import json
-import sys
+import os
 import unittest
 
 import requests
 
-sys.path.append('..')
-
-URL = 'http://localhost:10001/'  # Make sure Update to your localhost URL
+"""
+Make sure Update to your localhost URL
+"""
+URL = 'http://localhost:10001/'
 
 URL_extract_defs = URL + 'extract_definitions'
+
+ROOT = os.path.dirname(__file__)
 
 
 class TestApp(unittest.TestCase):
@@ -37,7 +40,7 @@ class TestCas(unittest.TestCase):
         self.assertFalse(x.json()['cas_content'], "should be empty if no input is empty")
 
     def test_extract_definitions(self):
-        json_filepath = 'test_files/json/doc_bf4ef384-bd7a-51c8-8f7d-d2f61865d767.json'
+        json_filepath = os.path.join(ROOT, 'test_files/json/doc_bf4ef384-bd7a-51c8-8f7d-d2f61865d767.json')
 
         data = _get_json(json_filepath)
 
@@ -61,8 +64,8 @@ class TestCas(unittest.TestCase):
         self.assertTrue(decoded_cas_content_out)
 
     def test_small_nested_tables(self):
-        json_filepath_in = 'test_files/json/small_nested_tables.json'
-        json_filepath_out = 'test_files/response_json/small_nested_tables_response.json'
+        json_filepath_in = os.path.join(ROOT, 'test_files/json/small_nested_tables.json')
+        json_filepath_out = os.path.join(ROOT, 'test_files/response_json/small_nested_tables_response.json')
 
         data_in = _get_json(json_filepath_in)
         data_out = _get_json(json_filepath_out)
@@ -72,7 +75,7 @@ class TestCas(unittest.TestCase):
         self.assertEqual(data_out, x.json())
 
     def test_decode(self):
-        json_filepath = 'test_files/json/small_nested_tables.json'
+        json_filepath = os.path.join(ROOT, 'test_files/json/small_nested_tables.json')
 
         data = _get_json(json_filepath)
 

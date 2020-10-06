@@ -1,5 +1,6 @@
 docker build \
 --no-cache \
---build-arg MODEL_DIR=bert_classifier/models_dgfisma_def_extraction/run_2020_06_26_11_56_31_acb319aac70b \
+--build-arg MODEL_DIR=bert_classifier/models_dgfisma_def_extraction/retraining_example \
 --build-arg TYPESYSTEM_PATH=tests/test_files/typesystems/typesystem.xml \
+-f docker/2app/Dockerfile \
 -t definition_extraction_app/retraining .
