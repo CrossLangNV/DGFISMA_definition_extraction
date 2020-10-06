@@ -14,60 +14,8 @@ import numpy as np
 import pandas as pd
 from numpy import random
 from sklearn.metrics import classification_report
-from sklearn.model_selection import train_test_split
 
-from data.load import get_training_data, get_gold_standard
-
-
-def tokenize(sentences, option='nltk'):
-    """
-    Experimenting with different options:
-        * BERT tokenizer
-        * Spacy
-        * https://www.nltk.org/
-    """
-
-    if option not in ['nltk']:
-        raise ValueError(f'Unknown value for option: {option}')
-
-    if option == 'nltk':
-
-        import nltk
-
-        nltk.word_tokenize(sentences[0])
-
-        if isinstance(sentences, list):
-
-            sentences_tok = []
-            for sentence in sentences:
-                sentences_tok.append(' '.join(nltk.word_tokenize(sentence)))
-
-        else:
-            sentences_tok = nltk.word_tokenize(sentences)
-
-        return sentences_tok
-
-
-def data_main(seed,
-              val_ratio):
-    # TODO refactor to be used by both trainers (Fasttext and BERT)
-
-    x_test, y_test = get_gold_standard()
-
-    x, y = get_training_data()
-
-    def preprocessing(x: List[str]) -> List[str]:
-        return [x_i.lower() for x_i in x]
-
-    x_test = preprocessing(tokenize(x_test))
-    x = preprocessing(tokenize(x))
-
-    x_train, x_valid, y_train, y_valid = train_test_split(x, y,
-                                                          random_state=seed,
-                                                          shuffle=True,
-                                                          test_size=val_ratio)
-
-    return (x_train, y_train), (x_valid, y_valid), (x_test, y_test)
+from data.examples import data_main
 
 
 class ModelFasttext(object):
@@ -137,8 +85,9 @@ class ModelFasttext(object):
                 'bucket': self.get_model().bucket}
 
 
-def main(seed=15092020,
-         val_ratio=.2
+def main(seed,
+         folder_out='.',
+         val_ratio=.2,
          ):
     """
     Produce a csv with performance of training fasttext for definition extraction
@@ -152,9 +101,9 @@ def main(seed=15092020,
     model_fasttext = ModelFasttext(seed)
 
     def get_data_info(n_train,
-                 report,
-                 label,
-                 dataset):
+                      report,
+                      label,
+                      dataset):
 
         labels = report.keys()
         assert label in labels
@@ -188,19 +137,19 @@ def main(seed=15092020,
         pred_test = model_fasttext.predict(x_test)
 
         n_train = len(x_train_split)
-        for dataset, x, y, pred in (
-                ('train', x_train_split, y_train_split, pred_train_split),
-                ('validation', x_valid, y_valid, pred_valid),
-                ('test', x_test, y_test, pred_test)
-        ):
+        for dataset, x, y, pred in [
+            ('train', x_train_split, y_train_split, pred_train_split),
+            ('validation', x_valid, y_valid, pred_valid),
+            ('test', x_test, y_test, pred_test)
+        ]:
 
             report = classification_report(y, pred, output_dict=True)
 
             for label in ['0', '1', 'weighted avg']:
                 info = get_data_info(n_train,
-                                report,
-                                label,
-                                dataset)
+                                     report,
+                                     label,
+                                     dataset)
 
                 info.update(model_info)
 
@@ -208,7 +157,7 @@ def main(seed=15092020,
 
     df = pd.DataFrame(l)
 
-    filename_save = f'fasttext_eval/autotune/eval_s{seed}.csv'
+    filename_save = os.path.join(folder_out, f'eval_s{seed}.csv')
     if not os.path.exists(os.path.dirname(filename_save)):
         os.mkdir(os.path.dirname(filename_save))
     df.to_csv(filename_save, sep=';')
@@ -221,6 +170,9 @@ if __name__ == '__main__':
     random.seed(123)
     seeds = random.randint(10000, size=(100,))
 
+    folder_out = os.path.join(os.path.dirname(__file__), 'bert_eval_wordpiece')
+
     for seed in seeds:
         main(seed=seed,
+             folder_out=folder_out
              )
