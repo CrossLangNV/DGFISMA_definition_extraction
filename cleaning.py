@@ -4,16 +4,31 @@ from typing import List, Tuple, Set
 from cassis import Cas
 
 
-def get_text_html(  cas: Cas, SofaID: str , tagnames : Set[str] = set( 'p')  ) -> (List[str], List[Tuple[ int,int ]]) :
+def get_text_html(  cas: Cas, SofaID: str , tagnames : Set[str] = set( 'p')  ) -> (List[str], List[Tuple[ int,int ]]):
     
     '''
     Given a cas, and a view (SofaID), this function selects all ValueBetweenTagType elements ( with tag.tagName in the set tagnames ), extracts the covered text, and returns the list of extracted sentences and a list of Tuples containing begin and end posistion of the extracted sentence in the sofa.
+    Function will only extract text of the deepest child of the to be extracted tagnames.
+        
+    :param cas: cassis.typesystem.Typesystem. Corresponding Typesystem of the cas.
+    :param SofaID: String. Name of the sofa.
+    :param tagnames: String. tagtypes to extract.
+    :return: Tuple. Tuple with extracted text and the begin and end postion of the extracted text in the sofa.
     '''
     
+    def deepest_child( cas:Cas, SofaID:str , tag ,tagnames: Set[str] = set( 'p' ) ) -> bool:
+        
+        #helper function
+        if len( [item for item in cas.get_view( SofaID ).select_covered(  "com.crosslang.uimahtmltotext.uima.type.ValueBetweenTagType" , tag ) \
+                 if item.tagName in tagnames ] ) > 1:
+            return False
+        else:
+            return True
+        
     sentences=[]
     begin_end_position=[]
     for tag in cas.get_view( SofaID ).select( "com.crosslang.uimahtmltotext.uima.type.ValueBetweenTagType" ):
-        if tag.tagName in set(tagnames):
+        if tag.tagName in set(tagnames) and deepest_child(  cas, SofaID, tag, tagnames ):
             sentence=tag.get_covered_text().strip()
             if sentence:
                 sentences.append( sentence )
