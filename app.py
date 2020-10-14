@@ -8,7 +8,7 @@ import binascii
 from cassis.typesystem import load_typesystem
 from cassis.xmi import load_cas_from_xmi
     
-from cleaning import get_text_html, get_text_pdf
+from cleaning import get_sentences
 from definition import DefinitionFinder
 
 app = Flask(__name__)
@@ -46,11 +46,11 @@ def extract_definitions():
 
     if request.json[ 'content_type'] == 'pdf':
 
-        sentences, begin_end_positions=get_text_pdf( cas , "html2textView" )
+        sentences, begin_end_positions=get_sentences( cas , "html2textView" )
         
     elif request.json[ 'content_type'] == 'html' or request.json[ 'content_type'] == 'xhtml':
 
-        sentences, begin_end_positions=get_text_html( cas , "html2textView" )
+        sentences, begin_end_positions=get_sentences( cas , "html2textView" )
 
     else:
         print( f"content type { request.json[ 'content_type'] } not supported by paragraph annotation app" )   
