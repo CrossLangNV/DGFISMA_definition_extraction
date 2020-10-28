@@ -1,4 +1,5 @@
 DATA/
+notebooks/
 #models
 *.pth
 *.p
