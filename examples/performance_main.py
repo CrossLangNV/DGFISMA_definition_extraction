@@ -12,7 +12,19 @@ import plac
 @plac.annotations(
     folder=("folder dir", "positional", None, Path),
 )
-def main(folder):
+def main(folder: Path,
+         label: str = 'weighted avg',
+         ylabel: str = 'f1-score'):
+    """
+
+    Args:
+        folder:
+        label: '0', '1' or 'weighted avg'
+        ylabel: 'precision', 'recall' or 'f1-score'
+
+    Returns:
+
+    """
     l_df = []
 
     for f in os.listdir(folder):
@@ -30,9 +42,7 @@ def main(folder):
     df = pd.concat(l_df, ignore_index=True)
 
     fig, ax = plt.subplots()
-    label = 'weighted avg'
     xlabel = 'n_train'
-    ylabel = 'f1-score'
 
     for name_set, group_set in df.groupby('set'):
 
@@ -93,9 +103,12 @@ if __name__ == '__main__':
         plac.call(main)
     else:
 
-        folder = f'fasttext_eval/autotune'
-        # folder = f'bert_eval_wordpiece'
+        # folder = f'fasttext_eval/autotune'
+        folder = f'bert_eval_wordpiece'
         # folder = f'bert_eval'
 
-        root = os.path.join(os.path.dirname(__file__), 'output', folder)
-        main(root)
+        root = os.path.join(os.path.dirname(__file__), '..', 'user_scripts', folder)
+        main(root,
+             label='0',
+             ylabel='precision'
+             )
