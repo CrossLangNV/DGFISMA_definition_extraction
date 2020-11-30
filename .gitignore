@@ -1,7 +1,7 @@
 #models
 *.pth
 *.p
-*.txt
+bert_classifier/*.txt
 *.zip
 
 # Byte-compiled / optimized / DLL files

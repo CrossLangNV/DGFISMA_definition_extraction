@@ -1,6 +1,7 @@
 #!/usr/local/bin/python
 import base64
 import binascii
+import logging
 
 from cassis.typesystem import load_typesystem
 from cassis.xmi import load_cas_from_xmi
@@ -8,8 +9,7 @@ from flask import Flask
 from flask import abort
 from flask import request
 
-from cleaning import get_text_html, get_text_pdf
-# from definition import DefinitionFinder
+from cleaning import get_text_html
 from models.preconfigured import BERTForDefinitionClassification
 
 app = Flask(__name__)
@@ -18,6 +18,8 @@ TYPESYSTEM_PATH = "/work/typesystems/typesystem.xml"
 MODEL_PATH = "/work/models/model.pth"
 DEVICE = 'cpu'  # 'cpu', 'cuda:0', 'cuda:1',...
 NR_OF_THREADS = 12  # ignored when device is not equal to 'cpu'
+
+MODEL = BERTForDefinitionClassification.from_dir(MODEL_PATH, device=DEVICE)
 
 
 @app.route('/extract_definitions', methods=['POST'])
@@ -35,7 +37,7 @@ def extract_definitions():
     try:
         decoded_cas_content = base64.b64decode(request.json['cas_content']).decode('utf-8')
     except binascii.Error:
-        print(f"could not decode the 'cas_content' field. Make sure it is in base64 encoding.")
+        logging.exception(f"could not decode the 'cas_content' field. Make sure it is in base64 encoding.")
         output_json['cas_content'] = ''
         output_json['content_type'] = request.json['content_type']
         return output_json
@@ -46,41 +48,26 @@ def extract_definitions():
     # load the cas:
     cas = load_cas_from_xmi(decoded_cas_content, typesystem=typesystem)
 
-    if request.json['content_type'] == 'pdf':
-
-        sentences, begin_end_positions = get_text_pdf(cas, "html2textView")
-
-    elif request.json['content_type'] == 'html' or request.json['content_type'] == 'xhtml':
-
+    try:
         sentences, begin_end_positions = get_text_html(cas, "html2textView")
-
-    else:
-        print(f"content type {request.json['content_type']} not supported by paragraph annotation app")
+    except:
+        logging.exception(f"content type {request.json['content_type']} not supported by paragraph annotation app")
         output_json['cas_content'] = request.json['cas_content']
         output_json['content_type'] = request.json['content_type']
         return output_json
 
-    if 0:
-        pass
-        # definition_finder = DefinitionFinder(sentences)
-        #
-        # # definitions=definition_finder.get_definitions_regex()
-        # definitions = definition_finder.get_definitions_bert(model_path=MODEL_PATH, device=DEVICE)
-
-    elif 1:
-        model = BERTForDefinitionClassification.from_dir(MODEL_PATH, device=DEVICE)
-        definitions, _ = model.predict(sentences)
+    definitions, _ = MODEL.predict(sentences)
 
     # sanity check
     assert len(definitions) == len(sentences) == len(begin_end_positions)
 
-    Sentence = typesystem.get_type('de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence')
+    SentenceClass = typesystem.get_type('de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence')
 
     # Only annotate sentences that are definitions
     for definition, begin_end_position in zip(definitions, begin_end_positions):
         if definition:
             cas.get_view('html2textView').add_annotation(
-                Sentence(begin=begin_end_position[0], end=begin_end_position[1], id="definition"))
+                SentenceClass(begin=begin_end_position[0], end=begin_end_position[1], id="definition"))
 
     output_json['cas_content'] = base64.b64encode(bytes(cas.to_xmi(), 'utf-8')).decode()
     output_json['content_type'] = request.json['content_type']

@@ -18,12 +18,3 @@ def get_text_html(cas: Cas, SofaID: str, tagnames: Set[str] = set('p')) -> (List
                 begin_end_position.append((tag.begin, tag.end))
 
     return sentences, begin_end_position
-
-
-def get_text_pdf(cas: Cas, SofaID: str) -> (List[str], List[Tuple[int, int]]):
-    '''
-    Given a cas, and a view, this function should return the text we want.
-    # TODO
-    '''
-
-    return ['test sentence'], [(0, 1)]
