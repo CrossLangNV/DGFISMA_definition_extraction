@@ -9,14 +9,15 @@ from flask import Flask
 from flask import abort
 from flask import request
 
-from cleaning import get_text_html
+from cas_parser import get_text_html
 from models.preconfigured import BERTForDefinitionClassification
+import os
 
 app = Flask(__name__)
 
 TYPESYSTEM_PATH = "/work/typesystems/typesystem.xml"
 MODEL_PATH = "/work/models/model.pth"
-DEVICE = 'cpu'  # 'cpu', 'cuda:0', 'cuda:1',...
+DEVICE = 'cpu' # os.getenv('DEVICE', 'cpu')  # 'cpu', 'cuda:0', 'cuda:1',...
 NR_OF_THREADS = 12  # ignored when device is not equal to 'cpu'
 
 MODEL = BERTForDefinitionClassification.from_dir(MODEL_PATH, device=DEVICE)
