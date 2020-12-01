@@ -1,0 +1,1 @@
+docker run -it -d --gpus '"device=1,"' -p 15000:5000 definition_extraction_app/base/gpu/remote

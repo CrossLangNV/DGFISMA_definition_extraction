@@ -1,0 +1,600 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>models package &mdash; Def extraction  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="user_scripts package" href="user_scripts.html" />
+    <link rel="prev" title="definition module" href="definition.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Def extraction
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Definition extraction</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="app.html">app module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleaning.html">cleaning module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">data package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="definition.html">definition module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">models package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-models.BERT">models.BERT module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-models.preconfigured">models.preconfigured module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-models">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="user_scripts.html">user_scripts package</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Def extraction</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">Definition extraction</a> &raquo;</li>
+        
+      <li>models package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/models.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="models-package">
+<h1>models package<a class="headerlink" href="#models-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-models.BERT">
+<span id="models-bert-module"></span><h2>models.BERT module<a class="headerlink" href="#module-models.BERT" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="models.BERT.BERTForSentenceClassification">
+<em class="property">class </em><code class="sig-prename descclassname">models.BERT.</code><code class="sig-name descname">BERTForSentenceClassification</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model_directory</span><span class="p">:</span> <span class="n">pathlib.Path</span></em>, <em class="sig-param"><span class="n">architecture_config</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#models.BERT.PredefinedConfig" title="models.BERT.PredefinedConfig">models.BERT.PredefinedConfig</a></span></em>, <em class="sig-param"><span class="n">model</span><span class="p">:</span> <span class="n">transformers.modeling_utils.PreTrainedModel</span></em>, <em class="sig-param"><span class="n">tokenizer</span><span class="p">:</span> <span class="n">transformers.tokenization_utils.PreTrainedTokenizer</span></em>, <em class="sig-param"><span class="n">bert_model</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">seed</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">20200922</span></em>, <em class="sig-param"><span class="n">device</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'cuda:0'</span></em>, <em class="sig-param"><span class="n">epoch_init</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">logger</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#models.BERT.BERTForSentenceClassification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classifier based on pretrained BERT model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model_directory</strong> (<em>Path</em>) – directory where model folder is saved.</p></li>
+<li><p><strong>architecture_config</strong> (<a class="reference internal" href="#models.BERT.PredefinedConfig" title="models.BERT.PredefinedConfig"><em>PredefinedConfig</em></a>) – </p></li>
+<li><p><strong>model</strong> (<em>PreTrainedModel</em>) – </p></li>
+<li><p><strong>tokenizer</strong> (<em>PreTrainedTokenizer</em>) – </p></li>
+<li><p><strong>bert_model</strong> (<em>str</em>) – name of the model type</p></li>
+<li><p><strong>seed</strong> (<em>int</em>) – value to set seed to make training reproducible.</p></li>
+<li><p><strong>device</strong> (<em>str</em>) – choose whether to use cpu or gpu. From (“cpu”, “cuda:0”)</p></li>
+<li><p><strong>epoch_init</strong> (<em>int</em>) – internally epoch count is saved. Can be updated if training further.</p></li>
+<li><p><strong>logger</strong> (<em>Logger</em>) – logger object that writes CMD output to log file.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="models.BERT.BERTForSentenceClassification.from_bert_model">
+<em class="property">classmethod </em><code class="sig-name descname">from_bert_model</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model_storage_directory</span><span class="p">:</span> <span class="n">Path</span></em>, <em class="sig-param"><span class="n">output_dim</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">bert_model</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'distilbert-base-uncased'</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#models.BERT.BERTForSentenceClassification" title="models.BERT.BERTForSentenceClassification">BERTForSentenceClassification</a><a class="headerlink" href="#models.BERT.BERTForSentenceClassification.from_bert_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>When building a new model, it is created based on a bert model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model_storage_directory</strong> – Directory where model will be created</p></li>
+<li><p><strong>output_dim</strong> – number of output channels for classification.</p></li>
+<li><p><strong>bert_model</strong> – name of preexisting bert model.</p></li>
+<li><p><strong>*args</strong> – Optional args that will be given to constructor</p></li>
+<li><p><strong>**kwargs</strong> – Optional kwargs that will be given to constructor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a <a class="reference internal" href="#models.BERT.BERTForSentenceClassification" title="models.BERT.BERTForSentenceClassification"><code class="xref py py-class docutils literal notranslate"><span class="pre">BERTForSentenceClassification</span></code></a> instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="models.BERT.BERTForSentenceClassification.from_dir">
+<em class="property">classmethod </em><code class="sig-name descname">from_dir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model_directory</span><span class="p">:</span> <span class="n">Path</span></em>, <em class="sig-param"><span class="n">bert_model</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'distilbert-base-uncased'</span></em>, <em class="sig-param"><span class="n">device</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'cuda:0'</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#models.BERT.BERTForSentenceClassification.from_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a <a class="reference internal" href="#models.BERT.BERTForSentenceClassification" title="models.BERT.BERTForSentenceClassification"><code class="xref py py-class docutils literal notranslate"><span class="pre">BERTForSentenceClassification</span></code></a> from directory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model_directory</strong> – directory where all model components are saved</p></li>
+<li><p><strong>bert_model</strong> – type of BERT model the model is based on.</p></li>
+<li><p><strong>device</strong> – specify whether CPU or GPU is used.</p></li>
+<li><p><strong>*args</strong> – optional args</p></li>
+<li><p><strong>**kwargs</strong> – optional kwargs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a <a class="reference internal" href="#models.BERT.BERTForSentenceClassification" title="models.BERT.BERTForSentenceClassification"><code class="xref py py-class docutils literal notranslate"><span class="pre">BERTForSentenceClassification</span></code></a> instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="models.BERT.BERTForSentenceClassification.get_model">
+<code class="sig-name descname">get_model</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#models.BERT.BERTForSentenceClassification.get_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the BERT model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the BERT model</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="models.BERT.BERTForSentenceClassification.get_optimizer">
+<code class="sig-name descname">get_optimizer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">learning_rate</span></em><span class="sig-paren">)</span><a class="headerlink" href="#models.BERT.BERTForSentenceClassification.get_optimizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialises and returns an AdamW optimizer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>learning_rate</strong> – to configure the optimer</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the AdamW optimizer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="models.BERT.BERTForSentenceClassification.predict">
+<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#models.BERT.BERTForSentenceClassification.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>The model predicts the labels for x</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – list of sentences to be predicted.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of labels and list of certainties of each class.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="models.BERT.BERTForSentenceClassification.train">
+<code class="sig-name descname">train</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x_train</span></em>, <em class="sig-param"><span class="n">y_train</span></em>, <em class="sig-param"><span class="n">validation_data</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">validation_fraction</span><span class="o">=</span><span class="default_value">0.2</span></em>, <em class="sig-param"><span class="n">train_bert</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'last_layer'</span></em>, <em class="sig-param"><span class="n">learning_rate</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">2e-05</span></em>, <em class="sig-param"><span class="n">epochs</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">10</span></em><span class="sig-paren">)</span><a class="headerlink" href="#models.BERT.BERTForSentenceClassification.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Train and update the model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_train</strong> – list of input sentences</p></li>
+<li><p><strong>y_train</strong> – list of labels</p></li>
+<li><p><strong>validation_data</strong> – (x, y) with validation data</p></li>
+<li><p><strong>validation_fraction</strong> – Is only used when validation data is not None</p></li>
+<li><p><strong>train_bert</strong> – what layers of bert to train
+‘last_layer’: only trains last layer
+‘all_layers’: all layers are trained</p></li>
+<li><p><strong>epochs</strong> – amount of epochs to train</p></li>
+<li><p><strong>learning_rate</strong> – learning rate for optimizer</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="models.BERT.BERTForSentenceClassification.train_function">
+<code class="sig-name descname">train_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataloader_train</span><span class="p">:</span> <span class="n">torch.utils.data.dataloader.DataLoader</span></em>, <em class="sig-param"><span class="n">optimizer</span></em>, <em class="sig-param"><span class="n">epochs</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">dataloader_valid</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>torch.utils.data.dataloader.DataLoader<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#models.BERT.BERTForSentenceClassification.train_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trains the Torch model given the preconfigured dataloader.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataloader_train</strong> (<em>DataLoader</em>) – </p></li>
+<li><p><strong>optimizer</strong> – Torch optimizer</p></li>
+<li><p><strong>epochs</strong> (<em>int</em>) – amount of epochs to train</p></li>
+<li><p><strong>dataloader_valid</strong> (<em>DataLoader</em>) – Optional, dataloader for validation data to validate on.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="models.BERT.DataLoaderBERT">
+<em class="property">class </em><code class="sig-prename descclassname">models.BERT.</code><code class="sig-name descname">DataLoaderBERT</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">batch_size</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">shuffle</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">sampler</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">batch_sampler</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_workers</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">collate_fn</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pin_memory</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">drop_last</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">timeout</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">worker_init_fn</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">multiprocessing_context</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#models.BERT.DataLoaderBERT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.dataloader.DataLoader</span></code></p>
+<p>Predefined data-loaders for training, validation and test datasets.</p>
+<dl class="py method">
+<dt id="models.BERT.DataLoaderBERT.from_prediction">
+<em class="property">classmethod </em><code class="sig-name descname">from_prediction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">prediction_inputs</span></em>, <em class="sig-param"><span class="n">prediction_masks</span></em>, <em class="sig-param"><span class="n">batch_size</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">32</span></em><span class="sig-paren">)</span> &#x2192; torch.utils.data.dataloader.DataLoader<a class="headerlink" href="#models.BERT.DataLoaderBERT.from_prediction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses a sequential sampler</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prediction_inputs</strong> – list with word indices</p></li>
+<li><p><strong>prediction_masks</strong> – list with masks</p></li>
+<li><p><strong>batch_size</strong> – amount of samples in each batch</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">DataLoader</span></code> object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="models.BERT.DataLoaderBERT.from_training">
+<em class="property">classmethod </em><code class="sig-name descname">from_training</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">training_inputs</span></em>, <em class="sig-param"><span class="n">training_masks</span></em>, <em class="sig-param"><span class="n">training_labels</span></em>, <em class="sig-param"><span class="n">batch_size</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">32</span></em><span class="sig-paren">)</span> &#x2192; torch.utils.data.dataloader.DataLoader<a class="headerlink" href="#models.BERT.DataLoaderBERT.from_training" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses a random sampler</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>training_inputs</strong> – list with word indices</p></li>
+<li><p><strong>training_masks</strong> – list with masks</p></li>
+<li><p><strong>training_labels</strong> – list of labels</p></li>
+<li><p><strong>batch_size</strong> – amount of samples in each batch</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">DataLoader</span></code> object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="models.BERT.DataLoaderBERT.from_validation">
+<em class="property">classmethod </em><code class="sig-name descname">from_validation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">validation_inputs</span></em>, <em class="sig-param"><span class="n">validation_masks</span></em>, <em class="sig-param"><span class="n">validation_labels</span></em>, <em class="sig-param"><span class="n">batch_size</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">32</span></em><span class="sig-paren">)</span> &#x2192; torch.utils.data.dataloader.DataLoader<a class="headerlink" href="#models.BERT.DataLoaderBERT.from_validation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses a sequential sampler</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>validation_inputs</strong> – list with word indices</p></li>
+<li><p><strong>validation_masks</strong> – list with masks</p></li>
+<li><p><strong>validation_labels</strong> – list of labels</p></li>
+<li><p><strong>batch_size</strong> – amount of samples in each batch</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">DataLoader</span></code> object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="models.BERT.PredefinedConfig">
+<em class="property">class </em><code class="sig-prename descclassname">models.BERT.</code><code class="sig-name descname">PredefinedConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#models.BERT.PredefinedConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">transformers.configuration_utils.PretrainedConfig</span></code></p>
+<p>Predefined configs</p>
+<dl class="py method">
+<dt id="models.BERT.PredefinedConfig.from_model">
+<em class="property">static </em><code class="sig-name descname">from_model</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bert_model</span></em><span class="sig-paren">)</span><a class="headerlink" href="#models.BERT.PredefinedConfig.from_model" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>bert_model</strong> – name of model</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="models.BERT.PredefinedTokenizer">
+<em class="property">class </em><code class="sig-prename descclassname">models.BERT.</code><code class="sig-name descname">PredefinedTokenizer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">max_len</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#models.BERT.PredefinedTokenizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">transformers.tokenization_utils.PreTrainedTokenizer</span></code></p>
+<p>Predefined tokenizers</p>
+<dl class="py method">
+<dt id="models.BERT.PredefinedTokenizer.from_model">
+<em class="property">static </em><code class="sig-name descname">from_model</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bert_model</span></em><span class="sig-paren">)</span><a class="headerlink" href="#models.BERT.PredefinedTokenizer.from_model" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>bert_model</strong> – name of model</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="models.BERT.TensorDataSetBERT">
+<em class="property">class </em><code class="sig-prename descclassname">models.BERT.</code><code class="sig-name descname">TensorDataSetBERT</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">tensors</span></em><span class="sig-paren">)</span><a class="headerlink" href="#models.BERT.TensorDataSetBERT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.dataset.TensorDataset</span></code></p>
+<p>Simplified <code class="xref py py-class docutils literal notranslate"><span class="pre">TensorDataSet</span></code> that can automatically convert lists to tensors.</p>
+<dl class="py method">
+<dt id="models.BERT.TensorDataSetBERT.from_lists">
+<em class="property">classmethod </em><code class="sig-name descname">from_lists</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">lists</span><span class="p">:</span> <span class="n">list</span></em><span class="sig-paren">)</span> &#x2192; torch.utils.data.dataset.TensorDataset<a class="headerlink" href="#models.BERT.TensorDataSetBERT.from_lists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Automatically casts the lists to tensors before building the <code class="xref py py-class docutils literal notranslate"><span class="pre">TensorDataSet</span></code> object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*lists</strong> – 1 or more lists that have to be cast</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TensorDataset object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="models.BERT.flat_accuracy">
+<code class="sig-prename descclassname">models.BERT.</code><code class="sig-name descname">flat_accuracy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">labels</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">preds</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#models.BERT.flat_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates accuracy of multi-label predictions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>labels</strong> – Array of shape (n, ), contains the index (in [0, k-1]) of the correct label.</p></li>
+<li><p><strong>preds</strong> – Array of shape (n, k) that contains a likelihood of each label.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>accuracy</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="models.BERT.get_model_directory">
+<code class="sig-prename descclassname">models.BERT.</code><code class="sig-name descname">get_model_directory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model_storage_directory</span></em><span class="sig-paren">)</span> &#x2192; pathlib.Path<a class="headerlink" href="#models.BERT.get_model_directory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a new directory based on current time in the provided directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>model_storage_directory</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Path to model directory</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="models.BERT.init_logger">
+<code class="sig-prename descclassname">models.BERT.</code><code class="sig-name descname">init_logger</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model_directory</span></em><span class="sig-paren">)</span><a class="headerlink" href="#models.BERT.init_logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Besides printing intermediate results to the command line, it is also saved in a log file.
+call logger.info(“&lt;String to write to log.txt&gt;”) instead of print.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>model_directory</strong> – directory where the log.txt is saved.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The logger object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-models.preconfigured">
+<span id="models-preconfigured-module"></span><h2>models.preconfigured module<a class="headerlink" href="#module-models.preconfigured" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="models.preconfigured.BERTForDefinitionClassification">
+<em class="property">class </em><code class="sig-prename descclassname">models.preconfigured.</code><code class="sig-name descname">BERTForDefinitionClassification</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model_directory</span><span class="p">:</span> <span class="n">pathlib.Path</span></em>, <em class="sig-param"><span class="n">architecture_config</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#models.BERT.PredefinedConfig" title="models.BERT.PredefinedConfig">models.BERT.PredefinedConfig</a></span></em>, <em class="sig-param"><span class="n">model</span><span class="p">:</span> <span class="n">transformers.modeling_utils.PreTrainedModel</span></em>, <em class="sig-param"><span class="n">tokenizer</span><span class="p">:</span> <span class="n">transformers.tokenization_utils.PreTrainedTokenizer</span></em>, <em class="sig-param"><span class="n">bert_model</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">seed</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">20200922</span></em>, <em class="sig-param"><span class="n">device</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'cuda:0'</span></em>, <em class="sig-param"><span class="n">epoch_init</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">logger</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#models.preconfigured.BERTForDefinitionClassification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.BERT.BERTForSentenceClassification" title="models.BERT.BERTForSentenceClassification"><code class="xref py py-class docutils literal notranslate"><span class="pre">models.BERT.BERTForSentenceClassification</span></code></a></p>
+<p>Class inherited from <code class="xref py py-class docutils literal notranslate"><span class="pre">BERTForSentenceClassification</span></code> to more easily build models for
+definition extraction</p>
+<dl class="py method">
+<dt id="models.preconfigured.BERTForDefinitionClassification.from_distilbert">
+<em class="property">classmethod </em><code class="sig-name descname">from_distilbert</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model_storage_directory</span><span class="p">:</span> <span class="n">pathlib.Path</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#models.BERT.BERTForSentenceClassification" title="models.BERT.BERTForSentenceClassification">models.BERT.BERTForSentenceClassification</a><a class="headerlink" href="#models.preconfigured.BERTForDefinitionClassification.from_distilbert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preconfigured DistilBERT model for 2 class sentence classification</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>model_storage_directory</strong> (<em>Path</em>) – directory where new model folder
+will be generated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a <code class="xref py py-class docutils literal notranslate"><span class="pre">BERTForSentenceClassification</span></code> model, pretrained on BERT.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="models.preconfigured.BERTForDefinitionClassification.train">
+<code class="sig-name descname">train</code><span class="sig-paren">(</span><em class="sig-param">x_train: List[str], y_train: List[int], validation_data: (&lt;class 'float'&gt;, &lt;class 'tuple'&gt;), *args, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#models.preconfigured.BERTForDefinitionClassification.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Train the model with validation data that can be either a fraction to
+be extracted from the training data, or a predefined validation set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_train</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – list with sentences to be classified</p></li>
+<li><p><strong>y_train</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – list with ground truth index per sentence.</p></li>
+<li><p><strong>validation_data</strong> (<em>float</em><em>, </em><em>tuple</em>) – can be either a fraction or a tuple
+with (x_valid, y_valid)</p></li>
+<li><p><strong>*args</strong> – optional args</p></li>
+<li><p><strong>**kwargs</strong> – optional kwargs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-models">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-models" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="user_scripts.html" class="btn btn-neutral float-right" title="user_scripts package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="definition.html" class="btn btn-neutral float-left" title="definition module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, CrossLang
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

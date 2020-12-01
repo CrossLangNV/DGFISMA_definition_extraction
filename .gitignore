@@ -1,9 +1,7 @@
-DATA/
-notebooks/
 #models
 *.pth
 *.p
-*.txt
+bert_classifier/*.txt
 *.zip
 
 # Byte-compiled / optimized / DLL files
@@ -108,9 +106,10 @@ ENV/
 # mypy
 .mypy_cache/
 
-#data
-.data/*
 .vector_cache/*
 saves/*
 *.pt
 .vscode/
+
+# Pycharm
+.idea

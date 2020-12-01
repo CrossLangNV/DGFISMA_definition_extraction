@@ -1,15 +1,19 @@
 import base64
 import json
-import sys
+import os
 import unittest
 
 import requests
 
-sys.path.append('..')
+"""
+Make sure Update to your localhost URL
+"""
 
-URL = 'http://localhost:10001/'  # Make sure Update to your localhost URL
+URL = os.getenv('URL', 'http://192.168.105.41:5000/')
 
 URL_extract_defs = URL + 'extract_definitions'
+
+ROOT = os.path.dirname(__file__)
 
 
 class TestApp(unittest.TestCase):
@@ -37,7 +41,7 @@ class TestCas(unittest.TestCase):
         self.assertFalse(x.json()['cas_content'], "should be empty if no input is empty")
 
     def test_extract_definitions(self):
-        json_filepath = 'test_files/json/doc_bf4ef384-bd7a-51c8-8f7d-d2f61865d767.json'
+        json_filepath = os.path.join(ROOT, 'test_files/json/doc_bf4ef384-bd7a-51c8-8f7d-d2f61865d767.json')
 
         data = _get_json(json_filepath)
 
@@ -61,8 +65,8 @@ class TestCas(unittest.TestCase):
         self.assertTrue(decoded_cas_content_out)
 
     def test_small_nested_tables(self):
-        json_filepath_in = 'test_files/json/small_nested_tables.json'
-        json_filepath_out = 'test_files/response_json/small_nested_tables_response.json'
+        json_filepath_in = os.path.join(ROOT, 'test_files/json/small_nested_tables.json')
+        json_filepath_out = os.path.join(ROOT, 'test_files/response_json/small_nested_tables_response.json')
 
         data_in = _get_json(json_filepath_in)
         data_out = _get_json(json_filepath_out)
@@ -72,18 +76,49 @@ class TestCas(unittest.TestCase):
         self.assertEqual(data_out, x.json())
 
     def test_decode(self):
-        json_filepath = 'test_files/json/small_nested_tables.json'
+        # TODO find html with definitions in them.
+        json_filepath = os.path.join(ROOT, 'test_files/json/small_nested_tables.json')
 
         data = _get_json(json_filepath)
 
         decoded_cas_content_in = _decode(data['cas_content'])
+        self.assertTrue(decoded_cas_content_in, 'Sanity check. Should be non-empty')
 
         x = requests.post(URL_extract_defs, json=data)
 
         decoded_cas_content_out = _decode(x.json()['cas_content'])
 
-        self.assertTrue(decoded_cas_content_in)
-        self.assertTrue(decoded_cas_content_out)
+        with self.subTest('Adding info'):
+            self.assertGreater(len(decoded_cas_content_out), len(decoded_cas_content_in),
+                               'Returned CAS should be bigger')
+
+        with self.subTest('Adding definition'):
+            self.assertIn("definition" in decoded_cas_content_out, 'Should contain a "definition" annotation')
+
+    def test_cas_pdf(self):
+        # TODO find pdf with definitions in them.
+        json_filepath = os.path.join(ROOT, 'test_files/json/cas_response_pdf.json')
+
+        data = _get_json(json_filepath)
+
+        x = requests.post(URL_extract_defs, json=data)
+
+        with self.subTest('json keys'):
+            self.assertCountEqual(['cas_content', 'content_type'], list(x.json().keys()),
+                                  'expected return keywords in json')
+
+        s_in = data['cas_content']
+        s_out = x.json()['cas_content']
+
+        decoded_cas_content_in = _decode(s_in)
+        decoded_cas_content_out = _decode(s_out)
+
+        with self.subTest('Adding info'):
+            self.assertGreaterEqual(len(decoded_cas_content_out), len(decoded_cas_content_in),
+                                    'Returned CAS should be bigger')
+
+        with self.subTest("Definition"):
+            self.assertIn("definition" in decoded_cas_content_out, 'Should contain a "definition" annotation')
 
 
 def _decode(data_json):

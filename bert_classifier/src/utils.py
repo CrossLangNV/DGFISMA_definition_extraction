@@ -1,5 +1,6 @@
-import sys
 import csv
+import sys
+
 
 # _csv.Error: field larger than field limit (131072)
 # https://stackoverflow.com/a/15063941/5983691
@@ -15,5 +16,5 @@ def csv_field_limit():
         try:
             csv.field_size_limit(maxInt)
         except OverflowError:
-            maxInt = int(maxInt/10)
+            maxInt = int(maxInt / 10)
             decrement = True
