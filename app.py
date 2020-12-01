@@ -2,6 +2,7 @@
 import base64
 import binascii
 import logging
+import os
 
 from cassis.typesystem import load_typesystem
 from cassis.xmi import load_cas_from_xmi
@@ -11,16 +12,18 @@ from flask import request
 
 from cas_parser import get_text_html
 from models.preconfigured import BERTForDefinitionClassification
-import os
 
 app = Flask(__name__)
 
-TYPESYSTEM_PATH = "/work/typesystems/typesystem.xml"
-MODEL_PATH = "/work/models/model.pth"
-DEVICE = 'cpu' # os.getenv('DEVICE', 'cpu')  # 'cpu', 'cuda:0', 'cuda:1',...
+PATH_TYPESYSTEM = "/work/typesystems/typesystem.xml"
+PATH_MODEL = "/work/models"
+DEVICE = os.getenv('DEVICE', 'cpu')  # 'cpu', 'cuda:0', 'cuda:1',...
 NR_OF_THREADS = 12  # ignored when device is not equal to 'cpu'
 
-MODEL = BERTForDefinitionClassification.from_dir(MODEL_PATH, device=DEVICE)
+print(f'Using device: {DEVICE}')
+logging.info(f'Using device: {DEVICE}')
+
+MODEL = BERTForDefinitionClassification.from_dir(PATH_MODEL, device=DEVICE)
 
 
 @app.route('/extract_definitions', methods=['POST'])
@@ -43,7 +46,7 @@ def extract_definitions():
         output_json['content_type'] = request.json['content_type']
         return output_json
 
-    with open(TYPESYSTEM_PATH, 'rb') as f:
+    with open(PATH_TYPESYSTEM, 'rb') as f:
         typesystem = load_typesystem(f)
 
     # load the cas:

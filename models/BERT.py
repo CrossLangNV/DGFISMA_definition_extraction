@@ -175,11 +175,16 @@ class BERTForSentenceClassification(object):
 
         # Load weights
         model_path = sorted([filename for filename in os.listdir(model_directory) if filename.endswith(".pth")])[-1]
-        checkpoint = torch.load(os.path.join(model_directory, model_path), map_location=torch.device(device))
+        model_filename = os.path.join(model_directory, model_path)
+        checkpoint = torch.load(model_filename, map_location=torch.device(device))
         model.load_state_dict(checkpoint['model_state_dict'])
 
         # Get the epoch from file.
-        epoch_init = int(os.path.splitext(model_path)[0].rsplit("_", 1)[-1])
+        try:
+            epoch_init = int(os.path.splitext(model_path)[0].rsplit("_", 1)[-1])
+        except ValueError:
+            # Unable to get epoch from filename.
+            epoch_init = 1
 
         # * Tokenizer *
         # tokenizer
@@ -336,7 +341,7 @@ class BERTForSentenceClassification(object):
         }, filename_pth)
 
     def predict(self,
-                x: List[str]):
+                x: List[str], verbose=0):
         """The model predicts the labels for x
 
         Args:
@@ -373,8 +378,9 @@ class BERTForSentenceClassification(object):
 
             prediction_proba_lst.append(prediction_proba)
 
-            n_temp += len(prediction_proba)
-            self.logger.info(f'\tInference: {n_temp / n_x:.1%}')
+            if verbose:
+                n_temp += len(prediction_proba)
+                self.logger.info(f'\tInference: {n_temp / n_x:.1%}')
 
         pred = np.concatenate(prediction_proba_lst, axis=0)
         predictions_labels = np.argmax(pred, axis=1)
