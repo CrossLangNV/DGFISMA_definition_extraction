@@ -1,4 +1,7 @@
+DATA
+notebooks
 #models
+*.ipynb
 *.pth
 *.p
 bert_classifier/*.txt

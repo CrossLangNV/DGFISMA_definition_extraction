@@ -2,9 +2,6 @@ import tempfile
 
 import fasttext
 
-from bert_classifier.src.predict import main
-
-
 class Prediction(list):
     def __init__(self, l):
 
@@ -12,35 +9,6 @@ class Prediction(list):
             assert isinstance(i, int)
 
         return super(Prediction, self).__init__(l)
-
-
-def predict_bert(filename: str,
-                 model_path: str,
-                 output_file: str = None
-                 ) -> Prediction:
-
-    if output_file is None:
-        with tempfile.NamedTemporaryFile() as temp:
-            output_file = temp.name
-
-            main(['--filename', filename,
-                  '--model_path', model_path,
-                  '--output_file', output_file])
-
-            pred = _open_lines(output_file)
-
-    else:
-
-        main(['--filename', filename,
-              '--model_path', model_path,
-              '--output_file', output_file])
-
-        pred = _open_lines(output_file)
-
-    pred_argmax = [int(a.split()[0]) for a in pred]
-
-    return Prediction(pred_argmax)
-
 
 def predict_fasttext(model_path, sentences) -> Prediction:
     model = fasttext.load_model(

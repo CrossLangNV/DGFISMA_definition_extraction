@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.1-cudnn8-runtime-ubuntu18.04
+FROM ubuntu:18.04
 
 MAINTAINER arne <arnedefauw@gmail.com>
 
@@ -18,7 +18,7 @@ RUN conda update -y conda
 
 RUN conda install -y python=3.8 && \
 conda install flask==1.1.2 && \
-conda install pytorch==1.7.0 cudatoolkit=10.1 -c pytorch && \
+conda install pytorch==1.7.0 cpuonly -c pytorch && \
 conda clean --all
 
 #Install Cython
@@ -34,8 +34,7 @@ WORKDIR /work
 
 #copy code:
 COPY app.py /work
-COPY cas_parser.py /work
-COPY definition.py /work
+COPY utils.py /work
 COPY bert_classifier/src/models.py /work/bert_classifier/src/
 
 COPY models /work/models
