@@ -18,7 +18,7 @@ For working with a CAS object in python, [the dkpro-cassis library](https://gith
 
 ## Definition extraction
 
-The task of definition extraction/detection is approached as a sentence classification task. A pre-trained DistilBert Model with a Sequence classification layer (DistilBertSequenceClassifier) on top is used for sentence classification. Such a model can be trained via the provided user scripts (see below).
+The task of definition extraction/detection is approached as a sentence classification task. A pre-trained DistilBert Model (provided by https://github.com/huggingface/transformers) with a Sequence classification layer (DistilBertSequenceClassifier) on top is used for sentence classification. Such a model can be trained via the provided user scripts (see below).
 
 The algorithm consists of the following steps:
 
