@@ -32,7 +32,7 @@ The algorithm consists of the following steps:
     
 3. Annotation of definitions:
 
-    If a sentence was labeled as a definition (or containing a definition), we use the offset, obtained in step 1, to add a `de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence` annotation to the `html2textView` view of the Cas, with `id="definition"`. Sentences that are labeled as not containing a definition, do not receive an annotation.
+    If a sentence was labeled as a definition, we use the offset, obtained in step 1, to add a `de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence` annotation to the `html2textView` view of the CAD, with `id="definition"`. Sentences that are labeled as not containing a definition, do not receive an annotation.
 
 4. Add lists/sublists/enumeration:
 
