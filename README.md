@@ -7,6 +7,7 @@ use "dcli.sh" to start a docker container
 Don't forget to:
 
 1) Set the path to the directory where the BERT model for classification is located in `dbuild.sh` . 
+(See https://github.com/CrossLangNV/DGFISMA_definition_extraction/releases/tag/v0.0.1 for such a trained (Distil)BERT model for classification)
 
 2) Set the path to the correct typesystem in `dbuild.sh`.
 
@@ -19,6 +20,8 @@ For working with a CAS object in python, [the dkpro-cassis library](https://gith
 ## Definition extraction
 
 The task of definition extraction/detection is approached as a sentence classification task. A pre-trained DistilBert Model (provided by https://github.com/huggingface/transformers) with a Sequence classification layer (DistilBertSequenceClassifier) on top is used for sentence classification. Such a model can be trained via the provided user scripts (see below).
+
+A trained DistilBertSequenceClassifier + training data and test data can be found here: https://github.com/CrossLangNV/DGFISMA_definition_extraction/releases/tag/v0.0.1
 
 The algorithm consists of the following steps:
 
