@@ -6,9 +6,10 @@ ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 # Install some basic utilities
 RUN apt-get update && apt-get install -y \
-    curl && \
+    curl \
+    git && \
     apt-get clean
-
+    
 # Install miniconda to /miniconda
 RUN curl -LO https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 RUN bash Miniconda3-latest-Linux-x86_64.sh -p /miniconda -b

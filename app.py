@@ -54,7 +54,7 @@ def extract_definitions():
         typesystem = load_typesystem(f)
 
     # load the cas:
-    cas = load_cas_from_xmi(decoded_cas_content, typesystem=typesystem)
+    cas = load_cas_from_xmi(decoded_cas_content, typesystem=typesystem, trusted=True )
 
     try:
         sentences, begin_end_positions = get_sentences(cas, SOFA_ID, tagnames=set( TAG_NAMES ), value_between_tagtype=VALUE_BETWEEN_TAG_TYPE  )
@@ -89,4 +89,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True, threaded=False)
+    app.run(host='0.0.0.0', port=5000, debug=True, threaded=False, use_reloader=False )
