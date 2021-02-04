@@ -31,8 +31,6 @@ RUN pip install Cython
 COPY requirements.txt /tmp/
 RUN pip install --requirement /tmp/requirements.txt
 
-RUN pip install git+https://github.com/dkpro/dkpro-cassis.git@master
-
 WORKDIR /work
 
 #copy code:

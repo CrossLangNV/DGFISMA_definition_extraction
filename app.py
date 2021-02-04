@@ -64,6 +64,12 @@ def extract_definitions():
         output_json['content_type'] = request.json['content_type']
         return output_json
 
+    if not sentences:
+        print( f"CAS does not contain '{VALUE_BETWEEN_TAG_TYPE}' annotations." )
+        output_json['cas_content'] = request.json['cas_content']
+        output_json['content_type'] = request.json['content_type']
+        return output_json
+    
     definitions, _ = MODEL.predict(sentences)
 
     # sanity check
