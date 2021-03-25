@@ -35,7 +35,7 @@ The algorithm consists of the following steps:
     
 3. Annotation of definitions:
 
-    If a sentence was labeled as a definition, we use the offset, obtained in step 1, to add a `de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence` annotation to the `html2textView` view of the CAD, with `id="definition"`. Sentences that are labeled as not containing a definition, do not receive an annotation.
+    If a sentence was labeled as a definition, we use the offset, obtained in step 1, to add a `de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence` annotation to the `html2textView` view of the CAS, with `id="definition"`. Sentences that are labeled as not containing a definition, do not receive an annotation.
 
 4. Add lists/sublists/enumeration:
 
@@ -51,7 +51,7 @@ We provide data on which the model for sentence classification is trained, in ht
 
 The train sentences can be found as `train_sentences.txt`, and accompanying labels in `train_labels.txt` (1: definition, 0: no definition).
 
-The training dataset contains 5311 sentences in total, of which 2083 are definitions. Of these 5311 sentences, the first 692 are from the DGFISMA corpus (311 definitions), the other sentences are obtained from the WCL Corpus, a subset of Wikipedia manually annotated with definitions and hypernyms *(Navigli et al. Learning word-class lattices for definition and hypernym extraction. In Proceedings of the 48th Annual Meeting of the Association for Computational Linguistics, ACL10, 2010)*.
+The training dataset contains 5311 sentences in total, of which 2083 are definitions. Of these 5311 sentences, the first 692 are from the DGFISMA corpus (311 definitions), the other sentences are obtained from the WCL Corpus, a subset of Wikipedia manually annotated with definitions and hypernyms *(Navigli et al, 2010. Learning word-class lattices for definition and hypernym extraction. In Proceedings of the 48th Annual Meeting of the Association for Computational Linguistics, ACL10)*.
 
 Test sentences can be found as `test_sentences.txt`, and `test_labels.txt`.
 
