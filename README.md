@@ -41,7 +41,6 @@ The algorithm consists of the following steps:
 
     To add context (i.e. lists/sublists/enumeration) to the detected definitions, we use a paragraph annotation `de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph`, that can be added to the `html2textView` view of the CAS using the paragraph annotation app: https://github.com/CrossLangNV/DGFISMA_paragraph_detection .
 
-Note that models for sentence classification are not included in the repository, because they are too large. 
 
 ## User scripts
 
