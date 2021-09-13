@@ -1,5 +1,6 @@
 Instructions
 ------------
+test
 
 use "dbuild.sh" to build the docker image <br />
 use "dcli.sh" to start a docker container
